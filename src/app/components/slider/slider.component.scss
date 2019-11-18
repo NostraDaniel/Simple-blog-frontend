@@ -1,0 +1,16 @@
+
+.img-cont {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+
+  &.first {
+    background-image: url("../../../assets/images/slider/1.jpg");
+  }
+}
+
+.active {
+  
+}
