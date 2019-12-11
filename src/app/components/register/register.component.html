@@ -1,0 +1,15 @@
+<div class="auth-centered">
+  <mat-form-field>
+    <input #username matInput placeholder="Username" type="text">
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input #email matInput placeholder="Email" type="email">
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <input #password matInput placeholder="Password" type="password">
+  </mat-form-field>
+  <br/>
+  <button mat-raised-button color="accent" (click)="register(username.value, email.value, password.value)">Register</button>
+</div>

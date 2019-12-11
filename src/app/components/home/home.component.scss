@@ -1,37 +1,6 @@
 $btn-color: #DE9A86;
 $hover: #BF6D54;
 
-main {
-  padding: 60px 0;
-
-  h1 {
-    position: relative;
-    text-align: center;
-    font-weight: 400;
-    padding-bottom: 20px;
-    margin-bottom: 50px;
-
-    &:before {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 485px;
-      height: 2px;
-      background: $btn-color;
-    }
-  }
-
-  .main-img-cont {
-    img {
-      max-width: 100%;
-    }
-  }
-}
-
-
 #separator {
   background-image: url("../../../assets/images/separator.jpg");
   height: 280px;
@@ -64,65 +33,4 @@ main {
   }
 }
 
-
-.card {
-  margin-bottom: 30px;
-}
-
-.card-cascade.narrower {
-  margin-top: 1.25rem;
-
-  .view.view-cascade {
-    margin-top: -1.25rem;
-    margin-right: 4%;
-    margin-left: 4%;
-    border-radius: .25rem;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
-  }
-
-  .card-img-top {
-    width: 100%;
-    border-top-left-radius: calc(.25rem - 1px);
-    border-top-right-radius: calc(.25rem - 1px)
-  }
-
-}
-
-.card-img-top.img-loaded {
-  width: 100%;
-  height: 200px;
-  background-image: url('../../../assets/images/blog2.jpg');
-  background-position: center;
-  background-size: cover;
-}
-
-.blog-btn {
-  background: $btn-color;
-  color: white;
-  transition: 0.3s all ease-in-out;
-
-  &:hover {
-    background: $hover;
-  }
-}
-
-#blog-heading {
-  position: relative;
-  font-weight: 400;
-  text-align: center;
-  padding-bottom: 10px;
-  margin-bottom: 50px;
-
-  &:before {
-    content: "";
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 195px;
-    height: 2px;
-    background: $btn-color;
-  }
-}
 

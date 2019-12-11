@@ -14,8 +14,11 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SliderComponent } from './components/slider/slider.component';
 import { ProceduresComponent } from './components/procedures/procedures.component';
-import { BlogComponent } from './blog/blog.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,18 +29,19 @@ import { ContactComponent } from './components/contact/contact.component';
     FooterComponent,
     SliderComponent,
     ProceduresComponent,
-    BlogComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MDBBootstrapModule.forRoot(),
     FormsModule,
     AppRoutingModule,
-    MatCardModule
+    CoreModule,
+    SharedModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

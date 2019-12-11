@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostsService } from 'src/app/core/services/posts.service';
+import { IPost } from 'src/app/common/interfaces/post';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  frontPagePosts: IPost[] = [];
+
+  constructor(
+    private readonly postsService: PostsService 
+  ) { }
 
   ngOnInit() {
+    this.postsService.getFrontPagePosts().subscribe(posts => {
+      this.frontPagePosts = posts;
+    });
   }
-
 }

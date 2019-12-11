@@ -1,0 +1,16 @@
+.gallery {
+  padding-top: 20px;
+}
+
+.view {
+  position: relative;
+
+  &:hover .mask {
+    top: 0;
+  }
+  .mask {
+    position: absolute;
+    top: - 100%;
+    transition: 0.3s all ease-in-out;
+  }
+}

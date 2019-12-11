@@ -1,0 +1,31 @@
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-8">
+        <div class="heading-cont left">
+          <h1>{{post.title}}</h1>
+        </div>
+        <article [innerHTML]="post.content" class="content">
+
+        </article>
+        <div class="gallery" *ngIf="post.__gallery__.length > 0">
+          <div class="row">
+            <div class="col col-lg-6" *ngFor="let image of post.__gallery__">
+              <div class="view">
+                <img class="img-fluid" src="{{image.url}}" alt="">
+                <div class="mask flex-center waves-effect waves-light rgba-pink-light">
+                  <p class="white-text">
+                    <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-4">
+        <app-sidebar></app-sidebar>
+      </div>
+    </div>
+  </div>
+</main>

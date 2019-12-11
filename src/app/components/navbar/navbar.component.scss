@@ -5,6 +5,13 @@
   background-color: #E5ABA1;
   font-weight: bold;
 
+  .col-12 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 47px;
+  }
+
   .contacts {
 
     span {
@@ -12,8 +19,28 @@
       margin-right: 10px;
     }
   }
-  .social-media {
 
+  .social-media {
+    display: flex;
+    align-items: center;
+
+    .log-buttons  {
+      padding: 5px 0;
+
+      button {
+        margin-left: 5px;
+
+        &.btn-log {
+          &.primary {
+            background: #93001f;
+          }
+          &.white {
+            color: black;
+          }
+        }
+      }
+    }
+    
     ul {
       display: flex;
       justify-content: center;
@@ -79,13 +106,6 @@
     }
   }
 
-  .col-12 {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 40px;
-  }
-
   a {
     text-decoration: none;
     color: white;
@@ -125,24 +145,24 @@
 
 // hover effect for the menu
 
-.snip1226 {
+.menu-list {
 
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
 }
-.snip1226 * {
+.menu-list * {
   box-sizing: border-box;
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
 }
-.snip1226 li {
+.menu-list li {
   display: inline-block;
   list-style: outside none none;
   margin-left: 1.5em;
   overflow: hidden;
 }
-.snip1226 a {
+.menu-list a {
   padding: 0.3em 0;
   color:rgba(0, 0 , 0, 1);
   position: relative;
@@ -151,13 +171,13 @@
   margin: 0;
   text-decoration: none;
 }
-.snip1226 a:before,
-.snip1226 a:after {
+.menu-list a:before,
+.menu-list a:after {
   position: absolute;
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
 }
-.snip1226 a:before {
+.menu-list a:before {
   bottom: 100%;
   display: block;
   height: 3px;
@@ -165,7 +185,7 @@
   content: "";
   background-color: #E5ABA1;
 }
-.snip1226 a:after {
+.menu-list a:after {
   padding: 0.3em 0;
   position: absolute;
   bottom: 100%;
@@ -174,8 +194,8 @@
   color: rgba(0, 0 , 0, 1);
   white-space: nowrap;
 }
-.snip1226 li:hover a,
-.snip1226 .current a {
+.menu-list li:hover a,
+.menu-list .current a {
   transform: translateY(100%);
 }
 /* Demo purposes only */

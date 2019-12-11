@@ -1,0 +1,35 @@
+<main>
+    <div class="container">
+      <div class="row">
+        <div class="col col-lg-9">
+          <div class="heading-cont space-center">
+            <h1>Posts</h1>
+            <a *ngIf="isLogged" mat-button routerLink="/blog/create-post" class="create-btn">Create post</a>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-12" *ngIf="posts.length === 0">
+              <h3>Currently no posts available</h3>
+            </div>
+
+            <div class="col-lg-6" *ngFor="let post of posts">
+              <app-post-card [post]="post"></app-post-card>
+            </div>
+
+            <div class="col-lg-12">
+              <mat-paginator 
+                [length]="postsCount"
+                [pageSize]="12"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="changePage($event)">
+              </mat-paginator>
+            </div>
+          </div>
+        </div>
+        <div class="col col-lg-3">
+          <app-sidebar></app-sidebar>
+        </div>
+      </div>
+    </div>
+  </main>
+  

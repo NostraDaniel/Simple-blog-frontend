@@ -1,29 +1,40 @@
 <div class="top-bar">
   <div class="container">
-    <div class="col-12">
-        <div class="contacts">
-            <span>
-              0886/964545
-            </span>
-            <span>
-              <a href="#">
-                code_beauty@abv.bg
-              </a>
-            </span>
-          </div>
-          <div class="social-media">
-            <ul>
-              <li><a href="https://www.facebook.com/pg/beautycodeaesthetic" target="blank"><i class="fab icon fa-facebook-f"></i></a></li>
-              <li><a href="https://www.instagram.com/code_beauty_aesthetic_center" target="blank"><i class="fab icon fa-instagram"></i></a></li>
-            </ul>
-          </div>
+    <div class="row">
+      <div class="col-12">
+          <div class="contacts">
+              <span>
+                0886/964545
+              </span>
+              <span>
+                <a href="#">
+                  code_beauty@abv.bg
+                </a>
+              </span>
+            </div>
+            <div class="social-media">
+              <ul>
+                <li><a href="https://www.facebook.com/pg/beautycodeaesthetic" target="blank"><i class="fab icon fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/code_beauty_aesthetic_center" target="blank"><i class="fab icon fa-instagram"></i></a></li>
+              </ul>
+              <div class="log-buttons">
+                <ng-template [ngIf]="!loggedIn">
+                  <button class="btn-log primary" mat-raised-button color="primary" routerLink="/login">Login</button>
+                  <button class="btn-log white" mat-stroked-button color="primary" routerLink="/register">Register</button>
+                </ng-template>
+                <ng-template [ngIf]="loggedIn">
+                  <button class="btn-log white" mat-stroked-button color="primary" (click)="triggerLogout()">Logout</button>
+                </ng-template>
+              </div>
+            </div>
+      </div>
     </div>
   </div>
 </div>
 
 <mdb-navbar SideClass="navbar sticky-top navbar-expand-lg scrolling-navbar" class="custom-nav">
-
-    <div class="menu-container col-12">
+  <!-- <div class="row"> -->
+    <div class="menu-container">
       <div class="branding">
         <a href="#" class="branding">
           <img src="../../../assets/images/branding-large.png" alt="branding">
@@ -31,16 +42,15 @@
       </div>
       <div class="menu">
         <nav>
-          <ul class="snip1226">
-            <li routerLinkActive="current"><a routerLink="/home"  data-hover="Начало" class="menu-link">Начало</a></li>
-            <li routerLinkActive="current"><a routerLink="/procedures" data-hover="Процедури" routerLinkActive="active-link" class="menu-link">Процедури</a></li>
-            <li routerLinkActive="current"><a routerLink="/blog" data-hover="Блог" routerLinkActive="active-link" class="menu-link">Блог</a></li>
-            <li routerLinkActive="current"><a routerLink="/contacts" data-hover="Контакти" routerLinkActive="active-link" class="menu-link">Контакти</a></li>
+          <ul class="menu-list">
+            <li routerLinkActive="current"><a routerLink="/home"  data-hover="Home" class="menu-link">Home</a></li>
+            <li routerLinkActive="current"><a routerLink="/blog" data-hover="Blog" routerLinkActive="active-link" class="menu-link">Blog</a></li>
+            <li routerLinkActive="current"><a routerLink="/contacts" data-hover="Contacts" routerLinkActive="active-link" class="menu-link">Contacts</a></li>
           </ul>
         </nav>
       </div>
     </div>
-
+  <!-- </div> -->
 </mdb-navbar>
 
 
