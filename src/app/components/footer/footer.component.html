@@ -19,34 +19,10 @@
         </div>
         <div class="col col-lg-3">
           <h4>Най-нови статии</h4>
-          <div class="article-container">
-            <img src="../../../assets/images/branding-small.png" alt="">
+          <div class="article-container" *ngFor="let post of newestPosts">
+            <img src="{{post.__frontImage__.src}}">
             <a href="#" class="heading">
-              Lorem ipsum dolor adipisicing elit. Non, repellat?
-            </a>
-          </div>
-          <div class="article-container">
-            <img src="../../../assets/images/branding-small.png" alt="">
-            <a href="#" class="heading">
-              Lorem ipsum dolor sit amet consectetur elit. Non, repellat?
-            </a>
-          </div>
-          <div class="article-container">
-            <img src="../../../assets/images/branding-small.png" alt="">
-            <a href="#" class="heading">
-              Lorem ipsum dolor sit elit. Non, repellat?
-            </a>
-          </div>
-          <div class="article-container">
-            <img src="../../../assets/images/branding-small.png" alt="">
-            <a href="#" class="heading">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, repellat?
-            </a>
-          </div>
-          <div class="article-container">
-            <img src="../../../assets/images/branding-small.png" alt="">
-            <a href="#" class="heading">
-              Lorem sit amet consectetur adipisicing elit. Non, repellat?
+              {{post.title}}
             </a>
           </div>
         </div>
@@ -71,7 +47,6 @@
             </div>
 
             <div class="wrap-input100 validate-input" data-validate="Message is required">
-              
               <textarea class="input100" name="message" placeholder="Вашето съобщение"></textarea>
               <span class="focus-input100"></span>
             </div>

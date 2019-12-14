@@ -14,20 +14,19 @@ import { PostsService } from 'src/app/core/services/posts.service';
 })
 export class AllPostsComponent implements OnInit, OnDestroy {
 
-  posts: IPost[] = [];
-  postsCount: number;
-  filter: string = '';
-  pageEvent: PageEvent;
-  
   private subscription: Subscription;
   private isLogged: boolean = false;
+
+  public posts: IPost[] = [];
+  public postsCount: number;
+  public filter: string = '';
+  public pageEvent: PageEvent;
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly postsService: PostsService,
     private readonly notificator: NotificatorService,
-    private readonly auth: AuthService,
-    private readonly router: Router,
+    private readonly auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -47,10 +46,6 @@ export class AllPostsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-  }
-
-  showPost(id: string): void {
-    this.router.navigate([`/blog/${id}`]);
   }
 
   delete(id: string): void {

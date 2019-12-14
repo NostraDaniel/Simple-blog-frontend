@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 import { NotificatorService } from './core/services/notificator.service';
 import { AuthService } from './core/services/auth.services';
 import { Router } from '@angular/router';
+import { PostsService } from './core/services/posts.service';
+import { IPost } from './common/interfaces/post';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +13,21 @@ import { Router } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
   private isLogged = false;
-  private subscription: Subscription;
+  private subscriptionAuth: Subscription;
+  private subscriptionPosts: Subscription;
+  public newestPosts: IPost[];
 
   constructor(
     private readonly notificator: NotificatorService,
     private readonly auth: AuthService,
     private readonly router: Router,
+    private readonly postsService: PostsService
   ) {
   }
 
   ngOnInit() {
 
-    this.subscription = this.auth.user$.subscribe(
+    this.subscriptionAuth = this.auth.user$.subscribe(
       username => {
         if (username === null) {
           this.isLogged = false;
@@ -31,10 +36,17 @@ export class AppComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.subscriptionPosts = this.postsService.newestPosts$.subscribe(
+      posts => {
+        this.newestPosts = posts;
+      }
+    )
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscriptionAuth.unsubscribe();
+    this.subscriptionPosts.unsubscribe();
   }
 
   logout() {

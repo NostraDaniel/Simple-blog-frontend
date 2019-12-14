@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { IPost } from 'src/app/common/interfaces/post';
 
 @Injectable({
@@ -8,9 +8,30 @@ import { IPost } from 'src/app/common/interfaces/post';
 })
 export class PostsService {
 
+  private readonly newestPostsSubject$ = new BehaviorSubject<IPost[] | null>([])
+  private readonly defautlImageUrl: string = '../../../assets/images/branding-small.png';
+
   constructor(
     private readonly http: HttpClient
-  ) {}
+  ) {
+    console.log('bok syzdavanka')
+    this.http.get<IPost[]>('http://localhost:4202/posts/newest').subscribe(posts =>  {
+      console.log(posts);
+      this.newestPostsSubject$.next(posts.map(post => {
+        if(!post['__frontImage__']) {
+          post['__frontImage__'] = {};
+          post['__frontImage__']['src'] = this.defautlImageUrl;
+        }
+        console.log(post);
+        return post;
+      }));
+    });
+  }
+
+
+  public get newestPosts$() {
+    return this.newestPostsSubject$.asObservable();
+  }
 
   public getSinglePost(id: string): Observable<IPost> {
     return this.http.get<IPost>(`http://localhost:4202/posts/${id}`);

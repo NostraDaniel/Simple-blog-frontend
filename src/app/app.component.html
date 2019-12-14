@@ -1,7 +1,11 @@
-<app-navbar [loggedIn]="isLogged" (logout)="logout()"></app-navbar>
-<app-slider></app-slider>
+<div class="wrapper">
+  <app-navbar [loggedIn]="isLogged" (logout)="logout()"></app-navbar>
+  <app-slider></app-slider>
+  
+  <router-outlet></router-outlet>
+</div>
 
-<router-outlet></router-outlet>
+<div class="footer-wrapper">
 
-
-<app-footer></app-footer>
+  <app-footer [newestPosts]="newestPosts"></app-footer>
+</div>

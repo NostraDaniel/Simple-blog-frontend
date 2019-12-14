@@ -3,14 +3,12 @@
     <!-- Card img -->
     
     <ng-container *ngIf="!!post.__frontImage__; else default">
-        <div class="card-img-top img-loaded">
-          <img src="{{post.__frontImage__.url}}" alt="">
+        <div class="card-img-top img-loaded" (click)="showPost(post.id)">
+          <img src="{{post.__frontImage__.src}}" alt="">
         </div>
     </ng-container>
     <ng-template #default>
-      <div class="card-img-top img-loaded">
-
-      </div>
+      <div class="card-img-top img-loaded" (click)="showPost(post.id)"></div>
     </ng-template>
  
     <a href="/blog/post/{{post.id}}">
@@ -27,8 +25,7 @@
     <!--Text-->
     <mdb-card-text>{{post.description}}
     </mdb-card-text>
-    
-    <a routerLink="/home" mdbBtn class="blog-btn" mdbWavesEffect>Read more</a>
-    <a routerLink="['/home']"  mdbBtn class="blog-btn" mdbWavesEffect>Read more</a>
+
+    <a (click)="showPost(post.id)"  mdbBtn class="blog-btn" mdbWavesEffect>Read more</a>
   </mdb-card-body>
 </mdb-card>

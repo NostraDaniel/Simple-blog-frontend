@@ -10,9 +10,9 @@
         </article>
         <div class="gallery" *ngIf="post.__gallery__.length > 0">
           <div class="row">
-            <div class="col col-lg-6" *ngFor="let image of post.__gallery__">
-              <div class="view">
-                <img class="img-fluid" src="{{image.url}}" alt="">
+            <div class="col col-lg-6" *ngFor="let image of post.__gallery__;let i = index;" >
+              <div (click)="open(i)" class="view">
+                <img class="img-fluid" src="{{image.src}}" alt="">
                 <div class="mask flex-center waves-effect waves-light rgba-pink-light">
                   <p class="white-text">
                     <mdb-icon fas icon="plus" size="2x"></mdb-icon>

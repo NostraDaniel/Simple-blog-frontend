@@ -112,7 +112,8 @@ export class CreatePostComponent implements OnInit {
         this.postForm.controls['frontImage'].setValue(imageRes);
 
         this.http.post('http://localhost:4202/posts', this.postForm.value).subscribe(postRes => {
-          this.router.navigate([`blog/post/${postRes['id']}`]);
+          // this.router.navigate([`blog/post/${postRes['id']}`]);
+          console.log(postRes)
         });
       });
     });
@@ -150,8 +151,8 @@ export class UploadAdapter {
    return this.loader.file
     .then( file => new Promise( ( resolve, reject ) => {
       this.component.uploadImage(file).subscribe(res => {
-        resolve({default: res.url})
+        resolve({default: res.src})
       })
     }));
- };
+  };
 }
