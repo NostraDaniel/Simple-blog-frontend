@@ -1,0 +1,33 @@
+.wrapper {
+  position: relative;
+
+  &:before {
+    content: "";
+    height: 110%;
+    width: 1px;
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    background:#dbdbdb;
+  }
+}
+
+.contact100-form {
+  flex-wrap: nowrap;
+  align-items: center;
+  padding-bottom: 30px;
+  
+  .search-btn {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin-top: 7px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .wrap-input100 {
+    margin-bottom: 0;
+  }
+}

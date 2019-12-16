@@ -8,11 +8,20 @@ $hover: #BF6D54;
   font-family: 'Open Sans', sans-serif;
 }
 
-::-moz-selection { background: #BF6D54; }
-::selection { background: #BF6D54; }
+::-moz-selection {
+  background: #BF6D54;
+}
 
-html, body { height: 100%; }
-body { 
+::selection {
+  background: #BF6D54;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -35,19 +44,19 @@ app-root {
 // removing input styles
 
 input {
-	outline: none;
-	border: none;
+  outline: none;
+  border: none;
 }
 
 input[type="number"] {
-    -moz-appearance: textfield;
-    appearance: none;
-    -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 textarea {
@@ -55,38 +64,83 @@ textarea {
   border: none;
 }
 
-textarea:focus, input:focus {
+textarea:focus,
+input:focus {
   border-color: transparent !important;
 }
 
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
 
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder {
+  color: transparent;
+}
 
-input::-webkit-input-placeholder {color: #cccccc;}
-input:-moz-placeholder {color: #cccccc;}
-input::-moz-placeholder {color: #cccccc;}
-input:-ms-input-placeholder {color: #cccccc;}
+input:focus::-moz-placeholder {
+  color: transparent;
+}
 
-textarea::-webkit-input-placeholder {color: #cccccc;}
-textarea:-moz-placeholder {color: #cccccc;}
-textarea::-moz-placeholder {color: #cccccc;}
-textarea:-ms-input-placeholder {color: #cccccc;}
+input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+textarea:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+textarea:focus:-moz-placeholder {
+  color: transparent;
+}
+
+textarea:focus::-moz-placeholder {
+  color: transparent;
+}
+
+textarea:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+input::-webkit-input-placeholder {
+  color: #cccccc;
+}
+
+input:-moz-placeholder {
+  color: #cccccc;
+}
+
+input::-moz-placeholder {
+  color: #cccccc;
+}
+
+input:-ms-input-placeholder {
+  color: #cccccc;
+}
+
+textarea::-webkit-input-placeholder {
+  color: #cccccc;
+}
+
+textarea:-moz-placeholder {
+  color: #cccccc;
+}
+
+textarea::-moz-placeholder {
+  color: #cccccc;
+}
+
+textarea:-ms-input-placeholder {
+  color: #cccccc;
+}
 
 button {
-	outline: none !important;
-	border: none;
-	background: transparent;
+  outline: none !important;
+  border: none;
+  background: transparent;
 }
 
 button:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 // end of removing styles
@@ -96,14 +150,20 @@ button:hover {
 }
 
 .carousel {
-  .carousel-indicators,.carousel-control-prev,.carousel-control-next {
+
+  .carousel-indicators,
+  .carousel-control-prev,
+  .carousel-control-next {
     visibility: hidden;
     opacity: 0;
     transition: 0.3s all ease-in-out;
   }
 
   &:hover {
-    .carousel-indicators,.carousel-control-prev,.carousel-control-next {
+
+    .carousel-indicators,
+    .carousel-control-prev,
+    .carousel-control-next {
       visibility: visible;
       opacity: 1;
     }
@@ -122,23 +182,27 @@ button:hover {
 
   &.active {
     .caption {
-      -webkit-animation-name: sliderCaption; /* Safari 4.0 - 8.0 */
-      -webkit-animation-duration: 10s; /* Safari 4.0 - 8.0 */
+      -webkit-animation-name: sliderCaption;
+      /* Safari 4.0 - 8.0 */
+      -webkit-animation-duration: 10s;
+      /* Safari 4.0 - 8.0 */
       animation-name: sliderCaption;
       animation-duration: 10s;
       animation-delay: 0.3s;
       -webkit-animation-delay: 0.3s;
     }
   }
+
   .container {
     height: 100%;
+
     .col-12 {
       height: 100%;
     }
   }
 
   .caption {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     padding: 10px;
     color: white;
     z-index: 10;
@@ -148,7 +212,8 @@ button:hover {
     border-radius: 10px;
     // visibility: hidden;
     // opacity: 0;
-    transition:0.10s all ease-in-out;
+    transition: 0.10s all ease-in-out;
+
     p {
       margin: 0;
     }
@@ -159,6 +224,7 @@ button:hover {
   0% {
     opacity: 0;
   }
+
   30% {
     opacity: 1;
   }
@@ -170,10 +236,11 @@ button:hover {
   0% {
     opacity: 0;
   }
+
   30% {
     opacity: 1;
   }
-  
+
 }
 
 .card {
@@ -188,7 +255,7 @@ button:hover {
     margin-right: 4%;
     margin-left: 4%;
     border-radius: .25rem;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18), 0 4px 15px 0 rgba(0,0,0,.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .18), 0 4px 15px 0 rgba(0, 0, 0, .15);
   }
 
   .card-img-top {
@@ -203,7 +270,7 @@ button:hover {
       height: auto;
       top: 50%;
       left: 50%;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
     }
   }
 
@@ -259,7 +326,7 @@ main {
 
 .heading-cont {
   text-align: center;
-  
+
   &.left {
     text-align: left;
   }
@@ -279,7 +346,8 @@ main {
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
-      width: 92%;;
+      width: 92%;
+      ;
       height: 2px;
       background: $btn-color;
     }
@@ -290,4 +358,177 @@ main {
   position: fixed;
   top: 15px;
   right: 15px;
+}
+
+
+
+/*==================================================================
+[ Form ]*/
+
+.contact100-form {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 68px;
+}
+
+.contact100-form-title {
+  display: block;
+  width: 100%;
+  font-family: Poppins-Bold;
+  font-size: 39px;
+  color: #333333;
+  line-height: 1.2;
+  text-align: left;
+  padding-bottom: 64px;
+}
+
+
+
+/*------------------------------------------------------------------
+[ Input ]*/
+
+.wrap-input100 {
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid #dbdbdb;
+  margin-bottom: 45px;
+}
+
+.label-input100 {
+  font-family: Poppins-SemiBold;
+  font-size: 18px;
+  color: #999999;
+  line-height: 1.2;
+  padding-left: 2px;
+}
+
+.input100 {
+  display: block;
+  width: 100%;
+  background: transparent;
+  font-size: 13px;
+  color: #3a3a3a;
+  line-height: 1.2;
+  padding: 0 2px;
+
+  &::placeholder {
+    color: #888888;
+  }
+}
+
+.focus-input100 {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.focus-input100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+
+  background: #DE9A86;
+
+}
+
+
+/*---------------------------------------------*/
+input.input100 {
+  height: 40px;
+}
+
+
+textarea.input100 {
+  min-height: 100px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+
+.input100:focus+.focus-input100::before {
+  width: 100%;
+}
+
+.has-val.input100+.focus-input100::before {
+  width: 100%;
+}
+
+
+/*------------------------------------------------------------------
+[ Button ]*/
+.container-contact100-form-btn {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wrap-contact100-form-btn {
+  display: block;
+  position: relative;
+  z-index: 1;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.contact100-form-bgbtn {
+  position: absolute;
+  z-index: -1;
+  width: 200%;
+  height: 100%;
+  background: #DE9A86;
+  top: 0;
+  left: -100%;
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.contact100-form-btn {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  min-width: 145px;
+  height: 42px;
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.2;
+  transition: 0.3s all ease-in-out;
+}
+
+.contact100-form-btn:hover {
+  background: #BF6D54;
+}
+
+.wrap-contact100-form-btn:hover .contact100-form-bgbtn {
+  left: 0;
 }

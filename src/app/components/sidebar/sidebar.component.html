@@ -1,1 +1,12 @@
-<p>sidebar works!</p>
+<div class="wrapper">
+  <div id="search">
+    <form class="contact100-form validate-form">
+      <div class="wrap-input100 validate-input">
+        <input #searchInput class="input100" type="text" name="name" placeholder="Search">
+        <span class="focus-input100"></span>
+      </div>
+      <button (click)="search(searchInput)" class="search-btn"> <mat-icon aria-hidden="false">search</mat-icon></button>
+    </form>
+  </div>
+  <app-newest-posts></app-newest-posts>
+</div>

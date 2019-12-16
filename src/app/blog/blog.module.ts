@@ -7,15 +7,20 @@ import { PostsResolverService } from './services/post-resolver.service';import {
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { LightboxModule } from 'ngx-lightbox';
+import { EditPostDialogComponent } from './edit-post-dialog/edit-post-dialog.component';
+import { PostOptionsComponent } from './post-options/post-options.component';
 
 @NgModule({
-  declarations: [AllPostsComponent, CreatePostComponent, SinglePostComponent],
+  declarations: [EditPostDialogComponent, AllPostsComponent, CreatePostComponent, SinglePostComponent, PostOptionsComponent],
   imports: [
     CommonModule,
     BlogRoutingModule,
     SharedModule,
     CKEditorModule,
     LightboxModule
+  ],
+  entryComponents: [
+    EditPostDialogComponent
   ],
   providers: [
     PostsResolverService

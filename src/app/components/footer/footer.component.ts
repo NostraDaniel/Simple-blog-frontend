@@ -8,8 +8,6 @@ import { IPost } from 'src/app/common/interfaces/post';
 })
 export class FooterComponent implements OnInit {
 
-  @Input() newestPosts: IPost[];
-
   constructor() { }
 
   ngOnInit() {

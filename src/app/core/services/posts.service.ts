@@ -14,20 +14,18 @@ export class PostsService {
   constructor(
     private readonly http: HttpClient
   ) {
-    console.log('bok syzdavanka')
     this.http.get<IPost[]>('http://localhost:4202/posts/newest').subscribe(posts =>  {
-      console.log(posts);
+
       this.newestPostsSubject$.next(posts.map(post => {
         if(!post['__frontImage__']) {
           post['__frontImage__'] = {};
           post['__frontImage__']['src'] = this.defautlImageUrl;
         }
-        console.log(post);
+
         return post;
       }));
     });
   }
-
 
   public get newestPosts$() {
     return this.newestPostsSubject$.asObservable();

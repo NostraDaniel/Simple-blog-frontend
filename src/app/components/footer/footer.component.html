@@ -18,23 +18,17 @@
           </ul>
         </div>
         <div class="col col-lg-3">
-          <h4>Най-нови статии</h4>
-          <div class="article-container" *ngFor="let post of newestPosts">
-            <img src="{{post.__frontImage__.src}}">
-            <a href="#" class="heading">
-              {{post.title}}
-            </a>
-          </div>
+          <app-newest-posts></app-newest-posts>
         </div>
         <div class="col col-lg-3">
           <h4>Пишете ни</h4>
           <form class="contact100-form validate-form">
-            <div class="wrap-input100 validate-input" data-validate="Name is required">
+            <div class="wrap-input100 validate-input">
               <input class="input100" type="text" name="name" placeholder="Вашето име">
               <span class="focus-input100"></span>
             </div>
 
-            <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+            <div class="wrap-input100 validate-input">
               
               <input class="input100" type="text" name="email" placeholder="Вашият и-мейл">
               <span class="focus-input100"></span>
@@ -46,7 +40,7 @@
               <span class="focus-input100"></span>
             </div>
 
-            <div class="wrap-input100 validate-input" data-validate="Message is required">
+            <div class="wrap-input100 validate-input">
               <textarea class="input100" name="message" placeholder="Вашето съобщение"></textarea>
               <span class="focus-input100"></span>
             </div>

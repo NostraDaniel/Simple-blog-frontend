@@ -43,13 +43,16 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { DragAndDropComponent } from '../components/drag-and-drop/drag-and-drop.component';
 import { DragDropDirective } from '../common/directives/drag-and-drop.directive';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
+import { NewestPostsComponent } from '../components/newest-posts/newest-posts.component';
 
 @NgModule({
   declarations: [
     PostCardComponent,
     DragAndDropComponent,
     DragDropDirective,
-    SidebarComponent
+    SidebarComponent,
+    NewestPostsComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -121,7 +124,8 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
     MatSlideToggleModule,
     DragAndDropComponent,
     DragDropDirective,
-    SidebarComponent
+    SidebarComponent,
+    NewestPostsComponent,
   ]
 })
 export class SharedModule {}

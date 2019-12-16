@@ -27,5 +27,18 @@
     </mdb-card-text>
 
     <a (click)="showPost(post.id)"  mdbBtn class="blog-btn" mdbWavesEffect>Read more</a>
+    <div class="options-cont">
+      <button mat-button [matMenuTriggerFor]="belowMenu" class="card-menu"><mat-icon>more_vert</mat-icon></button>
+      <mat-menu #belowMenu="matMenu" yPosition="below">
+        <button mat-menu-item  
+          (click)="editPost(post)">
+          <mat-icon>edit</mat-icon> Edit
+        </button>
+        <button mat-menu-item 
+          (click)="delete(post.id)">
+          <mat-icon>delete</mat-icon> Delete
+        </button>
+      </mat-menu>
+    </div>
   </mdb-card-body>
 </mdb-card>

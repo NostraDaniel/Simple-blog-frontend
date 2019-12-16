@@ -112,8 +112,7 @@ export class CreatePostComponent implements OnInit {
         this.postForm.controls['frontImage'].setValue(imageRes);
 
         this.http.post('http://localhost:4202/posts', this.postForm.value).subscribe(postRes => {
-          // this.router.navigate([`blog/post/${postRes['id']}`]);
-          console.log(postRes)
+          this.router.navigate([`blog/post/${postRes['id']}`]);
         });
       });
     });

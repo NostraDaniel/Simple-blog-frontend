@@ -1,0 +1,7 @@
+<h4>Newest posts</h4>
+<div class="article-container" *ngFor="let post of newestPosts">
+  <img src="{{post.__frontImage__.src}}">
+  <a (click)="showPost(post.id)" class="heading">
+    {{post.title}}
+  </a>
+</div>

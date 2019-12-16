@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/core/services/posts.service';
 import { IPost } from 'src/app/common/interfaces/post';
 import { Lightbox } from 'ngx-lightbox';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-single-post',
@@ -11,16 +12,15 @@ import { Lightbox } from 'ngx-lightbox';
 })
 export class SinglePostComponent implements OnInit {
 
-  public post: IPost | Object = {};
-  
+  public post: IPost;
+  private subscriptionNewestPosts: Subscription;
+  public newestPosts: IPost[];
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly postsService: PostsService,
     private readonly lightbox: Lightbox
-  ) { 
-
-   
-  }
+  ) {}
 
   open(index: number): void {
     this.lightbox.open(this.post['__gallery__'], index);
@@ -32,11 +32,15 @@ export class SinglePostComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(
-      
       data => {
-        console.log(data)
          this.post = data.post
       }
     );
+
+    this.subscriptionNewestPosts = this.postsService.newestPosts$.subscribe(
+      posts => {
+        this.newestPosts = posts;
+      }
+    )
   }
 }

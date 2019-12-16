@@ -83,7 +83,9 @@ export class AllPostsComponent implements OnInit, OnDestroy {
     )
   }
 
-  search() {
+  search(searchStr) {
+    this.filter = searchStr;
+    
     this.postsService.getAllPosts(1, 12, this.filter).subscribe(
       (posts) => {
         this.posts = posts.posts;
