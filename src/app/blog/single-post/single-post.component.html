@@ -8,6 +8,8 @@
         <article [innerHTML]="post.content" class="content">
 
         </article>
+        <ngx-masonry-gallery (clickImage)="clickedImage($event)" [width]='250' [images]='images'></ngx-masonry-gallery>
+
         <div class="gallery" *ngIf="post.__gallery__.length > 0">
           <div class="row">
             <div class="col col-lg-4" *ngFor="let image of post.__gallery__;let i = index;" >

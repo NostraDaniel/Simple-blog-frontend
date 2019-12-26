@@ -95,4 +95,5 @@ export class AllPostsComponent implements OnInit, OnDestroy {
       }
     )
   }
+  
 }

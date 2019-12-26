@@ -4,6 +4,7 @@ import { PostsService } from 'src/app/core/services/posts.service';
 import { IPost } from 'src/app/common/interfaces/post';
 import { Lightbox } from 'ngx-lightbox';
 import { Subscription } from 'rxjs';
+import { IMasonryGalleryImage } from 'ngx-masonry-gallery';
 
 @Component({
   selector: 'app-single-post',
@@ -12,35 +13,49 @@ import { Subscription } from 'rxjs';
 })
 export class SinglePostComponent implements OnInit {
 
-  public post: IPost;
+  private post: IPost;
   private subscriptionNewestPosts: Subscription;
-  public newestPosts: IPost[];
+  private masonryImages: string[];
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly postsService: PostsService,
     private readonly lightbox: Lightbox
-  ) {}
+  ) { }
 
   open(index: number): void {
-    this.lightbox.open(this.post['__gallery__'], index);
+    console.log(this.post['__gallery__'][index]);
   }
 
   close(): void {
     this.lightbox.close();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.data.subscribe(
       data => {
-         this.post = data.post
+        this.post = data.post;
+        this.masonryImages = data.post.__gallery__.map(image => image.src);
       }
     );
 
-    this.subscriptionNewestPosts = this.postsService.newestPosts$.subscribe(
-      posts => {
-        this.newestPosts = posts;
-      }
-    )
+    // this.subscriptionNewestPosts = this.postsService.newestPosts$.subscribe(
+    //   posts => {
+    //     this.newestPosts = posts;
+    //   }
+    // )
+  }
+
+  public get images(): IMasonryGalleryImage[] {
+    return this.masonryImages.map(m => <IMasonryGalleryImage>{
+      imageUrl: m
+    });
+  }
+
+  clickedImage(event): void {
+    const gallery = this.post['__gallery__'];
+    const index = gallery.findIndex(image => image['src'] === event['imageUrl']);
+
+    this.lightbox.open(this.post['__gallery__'], index);
   }
 }

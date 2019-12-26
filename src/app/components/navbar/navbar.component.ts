@@ -10,8 +10,7 @@ export class NavbarComponent implements OnInit {
   @Input()
   public loggedIn;
 
-  @Output()
-  public logout = new EventEmitter<undefined>();
+  @Output() public logout = new EventEmitter<undefined>();
   
   constructor() { }
 

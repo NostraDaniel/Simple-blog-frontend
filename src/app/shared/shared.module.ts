@@ -38,12 +38,13 @@ import {
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { PostCardComponent } from '../components/post-card/post-card.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { DragAndDropComponent } from '../components/drag-and-drop/drag-and-drop.component';
 import { DragDropDirective } from '../common/directives/drag-and-drop.directive';
 import { SidebarComponent } from '../components/sidebar/sidebar.component';
 import { NewestPostsComponent } from '../components/newest-posts/newest-posts.component';
+import { PostCardComponent } from '../blog/post-card/post-card.component';
+import { PostOptionsComponent } from '../blog/post-options/post-options.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { NewestPostsComponent } from '../components/newest-posts/newest-posts.co
     DragDropDirective,
     SidebarComponent,
     NewestPostsComponent,
-    
+    PostOptionsComponent
   ],
   imports: [
     CommonModule,
@@ -126,6 +127,7 @@ import { NewestPostsComponent } from '../components/newest-posts/newest-posts.co
     DragDropDirective,
     SidebarComponent,
     NewestPostsComponent,
+    PostOptionsComponent
   ]
 })
 export class SharedModule {}

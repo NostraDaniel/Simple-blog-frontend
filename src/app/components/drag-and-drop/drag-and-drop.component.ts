@@ -7,8 +7,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class DragAndDropComponent implements OnInit {
 
-  @Output() filesEvent = new EventEmitter<any[]>();
-  files: any[] = [];
+  @Output() public filesEvent = new EventEmitter<any[]>();
+  public files: any[] = [];
 
   constructor() { }
 
