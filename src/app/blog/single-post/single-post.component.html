@@ -8,21 +8,9 @@
         <article [innerHTML]="post.content" class="content">
 
         </article>
-        <ngx-masonry-gallery (clickImage)="clickedImage($event)" [width]='250' [images]='images'></ngx-masonry-gallery>
-
+        
         <div class="gallery" *ngIf="post.__gallery__.length > 0">
-          <div class="row">
-            <div class="col col-lg-4" *ngFor="let image of post.__gallery__;let i = index;" >
-              <div (click)="open(i)" class="view">
-                <img class="img-fluid" src="{{image.src}}" alt="">
-                <div class="mask flex-center waves-effect waves-light rgba-pink-light">
-                  <p class="white-text">
-                    <mdb-icon fas icon="plus" size="2x"></mdb-icon>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+            <ngx-masonry-gallery (clickImage)="clickedImage($event)" [width]='250' [images]='images'></ngx-masonry-gallery>
         </div>
       </div>
     </div>
