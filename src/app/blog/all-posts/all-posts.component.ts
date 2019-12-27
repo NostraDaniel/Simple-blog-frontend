@@ -4,7 +4,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { Subscription } from 'rxjs';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
 import { AuthService } from 'src/app/core/services/auth.services';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/core/services/posts.service';
 
 @Component({
@@ -51,7 +51,10 @@ export class AllPostsComponent implements OnInit, OnDestroy {
   delete(id: string): void {
     this.postsService.delete(id).subscribe(
       (data) => {
-        this.getAllPosts();
+        const indexDeleted = this.posts.findIndex(post => id === post.id);
+
+        this.posts.splice(indexDeleted, 1);
+        this.postsService.refreshNewestPosts();
         this.notificator.success('Post was successfully deleted!');
       },
       (err) => {

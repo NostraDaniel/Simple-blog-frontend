@@ -14,7 +14,6 @@ import { IMasonryGalleryImage } from 'ngx-masonry-gallery';
 export class SinglePostComponent implements OnInit {
 
   private post: IPost;
-  private subscriptionNewestPosts: Subscription;
   private masonryImages: string[];
 
   constructor(
@@ -38,12 +37,6 @@ export class SinglePostComponent implements OnInit {
         this.masonryImages = data.post.__gallery__.map(image => image.src);
       }
     );
-
-    // this.subscriptionNewestPosts = this.postsService.newestPosts$.subscribe(
-    //   posts => {
-    //     this.newestPosts = posts;
-    //   }
-    // )
   }
 
   public get images(): IMasonryGalleryImage[] {

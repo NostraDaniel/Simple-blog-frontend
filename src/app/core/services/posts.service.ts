@@ -14,6 +14,14 @@ export class PostsService {
   constructor(
     private readonly http: HttpClient
   ) {
+    this.refreshNewestPosts();
+  }
+
+  public get newestPosts$(): Observable<IPost[] | null> {
+    return this.newestPostsSubject$.asObservable();
+  }
+
+  public refreshNewestPosts():void {
     this.http.get<IPost[]>('http://localhost:4202/posts/newest').subscribe(posts =>  {
 
       this.newestPostsSubject$.next(posts.map(post => {
@@ -25,10 +33,6 @@ export class PostsService {
         return post;
       }));
     });
-  }
-
-  public get newestPosts$() {
-    return this.newestPostsSubject$.asObservable();
   }
 
   public getSinglePost(id: string): Observable<IPost> {
@@ -48,6 +52,7 @@ export class PostsService {
   }
 
   public delete(id: string): Observable<any> {
-    return this.http.delete(`http://localhost:4202/api/posts/${id}`);
+    console.log(id);
+    return this.http.delete(`http://localhost:4202/posts/${id}`);
   }
 }

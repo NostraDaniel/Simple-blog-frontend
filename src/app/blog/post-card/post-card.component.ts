@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IPost } from 'src/app/common/interfaces/post';
-import { Router } from '@angular/router';import { EditPostDialogComponent } from 'src/app/blog/edit-post-dialog/edit-post-dialog.component';
-import { EventEmitter } from 'events';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-card',
@@ -17,9 +16,7 @@ export class PostCardComponent implements OnInit {
     private readonly router: Router,
   ) { }
 
-  ngOnInit() {
-    console.log(this.post);
-  }
+  ngOnInit() {}
 
   showPost(id: string): void {
     this.router.navigate([`/blog/post/${id}`]);
