@@ -1,11 +1,47 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
+<h1 mat-dialog-title>Edit</h1>
+<div class="dialog-content" mat-dialog-content>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+
+    <label for="title">Title</label>
+    <div class="wrap-input100 validate-input">
+      <input class="input100" type="text" formControlName="title" id="title" placeholder="Title">
+      <span class="focus-input100"></span>
+    </div>
+
+    <label for="description">Description</label>
+    <div class="wrap-input100 validate-input">
+      <input class="input100" type="text" formControlName="description" id="description" placeholder="Description">
+      <span class="focus-input100"></span>
+    </div>
+
+    <div class="margin-bottom">
+      <label >Content</label>
+      <ckeditor (ready)="onReady($event)" [editor]="editor" formControlName="content"></ckeditor>
+    </div>
+
+    <div class="margin-bottom">
+      <mat-slide-toggle formControlName="isPublished">Publish</mat-slide-toggle>
+      <mat-slide-toggle formControlName="isFrontPage">Front Page</mat-slide-toggle>
+    </div>
+
+    <div class="margin-bottom image-upload-container">
+      <label for="frontImage">
+        Front Image
+      </label>
+      <input type="file" id="frontImage" name="image" (change)="fileProgress($event)" />
+      <div *ngIf="fileUploadProgress">
+        Upload progress: {{ fileUploadProgress }}
+      </div>
+    </div>
+    <div class="margin-bottom image-upload-container">
+        <label gallery>
+          Gallery
+        </label>
+      <app-drag-and-drop (filesEvent)='changeGalleryFiles($event)'></app-drag-and-drop>
+    </div>
+</form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Edit</button>
 </div>

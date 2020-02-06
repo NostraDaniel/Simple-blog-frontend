@@ -1,33 +1,28 @@
 <main>
   <div class="container">
     <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col col-lg-12">
-        <div class="heading-cont left">
-          <h1>
-            Create Post
-          </h1>
-        </div>
-      </div>
+      <div class="row">
 
-      <div class="col col-lg-5">
+        <div class="col col-lg-12">
+          <div class="heading-cont left">
+            <h1>
+              Create Post
+            </h1>
+          </div>
+        </div>
+
+        <div class="col col-lg-5">
           <div class="row">
-            
             <div class="col col-lg-12">
-              <mat-form-field class="full-width">
-                <input class="custom-input-field" formControlName="title" matInput placeholder="Title">
-              </mat-form-field>
+              <div class="wrap-input100 validate-input">
+                <input class="input100" type="text" formControlName="title" placeholder="Title">
+                <span class="focus-input100"></span>
+              </div>
             </div>
             <div class="col col-lg-12">
-              <mat-form-field class="full-width">
-                <input class="input-field" matInput formControlName="description" placeholder="Description">
-              </mat-form-field>
-            </div>
-            
-            <div class="col col-lg-12">
-              <input type="file" name="image" (change)="fileProgress($event)" />
-              <div *ngIf="fileUploadProgress">
-                Upload progress: {{ fileUploadProgress }}
+              <div class="wrap-input100 validate-input">
+                <input class="input100" type="text" formControlName="description" placeholder="Description">
+                <span class="focus-input100"></span>
               </div>
             </div>
             <div class="col col-lg-6">
@@ -36,23 +31,40 @@
             <div class="col col-lg-6">
               <mat-slide-toggle formControlName="isFrontPage">Front Page</mat-slide-toggle>
             </div>
-            <div class="col col-lg-12">
+            <div class="col col-lg-12 image-upload-container">
+              <h4>
+                Front Image
+              </h4>
+              <input type="file" name="image" (change)="fileProgress($event)" />
+              <div *ngIf="fileUploadProgress">
+                Upload progress: {{ fileUploadProgress }}
+              </div>
+            </div>
+            <div class="col col-lg-12 image-upload-container">
+              <h4>
+                Gallery
+              </h4>
               <app-drag-and-drop (filesEvent)='changeGalleryFiles($event)'></app-drag-and-drop>
             </div>
             <div class="col col-lg-12">
-              <button mat-button action="submit" class="create-btn">Create post</button>
+              <div class="container-contact100-form-btn">
+                <div class="wrap-contact100-form-btn">
+                  <div class="contact100-form-bgbtn"></div>
+                  <button action="submit" class="contact100-form-btn">Create post</button>
+                </div>
+              </div>
             </div>
           </div>
-       
-      </div>
+        </div>
 
-      <div class="col col-lg-7">
-        <h4>
-          Content
-        </h4>
-        <ckeditor (ready)="onReady($event)" [editor]="editor" formControlName="content"></ckeditor>
+        <div class="col col-lg-7">
+          <h4>
+            Content
+          </h4>
+          <ckeditor (ready)="onReady($event)" [editor]="editor" formControlName="content"></ckeditor>
+        </div>
+
       </div>
-    </div>
     </form>
   </div>
 </main>

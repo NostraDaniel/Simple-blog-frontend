@@ -20,7 +20,7 @@ export class DragAndDropComponent implements OnInit {
       const element = event[index];
       this.files.push(element)
     }
-
+    console.log(this.files);
     this.filesEvent.emit(this.files);
   }
 

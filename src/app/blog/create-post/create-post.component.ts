@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { UploadAdapter } from 'src/app/common/classes/upload-adapter';
 
 @Component({
   selector: 'app-create-post',
@@ -29,10 +30,6 @@ export class CreatePostComponent implements OnInit {
     isFrontPage: [false],
     frontImage: [''],
     gallery: ['']
-  });
-  public secondForm = this.fb.group({
-    frontImage: [''],
-    files: ['']
   });
 
   constructor(
@@ -105,16 +102,25 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('Gallery', this.galleryImages);
+    console.log('frontImage', this.frontImage);
+    console.log('formata', this.postForm);
+    console.log('----------------------');
     this.uploadMultipleImages(this.galleryImages).subscribe((galleryRes) => {
+      
+      console.log(galleryRes);
       this.postForm.controls['gallery'].setValue(galleryRes);
       
       this.uploadImage(this.frontImage).subscribe(imageRes => {
         this.postForm.controls['frontImage'].setValue(imageRes);
 
         this.http.post('http://localhost:4202/posts', this.postForm.value).subscribe(postRes => {
-          this.router.navigate([`blog/post/${postRes['id']}`]);
+          // this.router.navigate([`blog/post/${postRes['id']}`]);
         });
       });
+    },
+    (err) => {
+      this.notificator.error('There was problem with uploading the gallery images.');
     });
   }
 
@@ -138,20 +144,4 @@ export class CreatePostComponent implements OnInit {
 
     return true;
   }
-}
-
-export class UploadAdapter {
-  constructor( 
-    private loader,
-    private component,
-  ) {}
-
-  async upload() {
-   return this.loader.file
-    .then( file => new Promise( ( resolve, reject ) => {
-      this.component.uploadImage(file).subscribe(res => {
-        resolve({default: res.src})
-      })
-    }));
-  };
 }

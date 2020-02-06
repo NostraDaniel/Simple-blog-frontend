@@ -22,9 +22,9 @@ export class PostOptionsComponent implements OnInit {
 
   editPost(post: IPost): void {
     const dialogRef = this.dialog.open(EditPostDialogComponent, {
-      width: '350px',
-      height: '350px',
-      data: {name: 'Dani', animal: 'Maimuna'}
+      width: '600px',
+      height: '800px',
+      data: this.post
     });
 
     dialogRef.afterClosed().subscribe(result => {
