@@ -9,6 +9,10 @@ import { SinglePostComponent } from './single-post/single-post.component';
 import { LightboxModule } from 'ngx-lightbox';
 import { EditPostDialogComponent } from './edit-post-dialog/edit-post-dialog.component';
 import { MasonryGalleryModule } from 'ngx-masonry-gallery';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServerErrorInterceptor } from '../common/interceptors/server-error.interceptor';
+import { AuthTokenInterceptor } from '../common/interceptors/auth.interceptor';
+import { SpinnerInterceptor } from '../common/interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,22 @@ import { MasonryGalleryModule } from 'ngx-masonry-gallery';
     EditPostDialogComponent
   ],
   providers: [
-    PostsResolverService
+    PostsResolverService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
+    },
   ]
 })
 export class BlogModule { }

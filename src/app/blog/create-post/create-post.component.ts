@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { HttpClient } from '@angular/common/http';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { UploadAdapter } from 'src/app/common/classes/upload-adapter';
+import { PostsService } from 'src/app/core/services/posts.service';
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
-export class CreatePostComponent implements OnInit {
+export class CreatePostComponent {
 
-  public frontImage: File = null;
-  public galleryImages: File[] = [];
+  public frontImage: any = null;
+  public galleryImages: any = [];
   public previewUrl:any = null;
   public fileUploadProgress: string = null;
   public uploadedFilePath: string = null;
@@ -24,23 +24,24 @@ export class CreatePostComponent implements OnInit {
   public editor = ClassicEditor;
   public postForm = this.fb.group({
     isPublished:[false],
-    title: [''],
-    content: [''],
-    description: [''],
+    title: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    content: ['', [ Validators.required, Validators.minLength(15),Validators.maxLength(10000)]],
+    description: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
     isFrontPage: [false],
     frontImage: [''],
     gallery: ['']
   });
+  public submitted: boolean = false;
 
   constructor(
-    private readonly router: Router,
+    private readonly router: Router,    private readonly fb: FormBuilder,
     private readonly notificator: NotificatorService,
-    private readonly fb: FormBuilder,
-    public readonly http: HttpClient,
+    private readonly postsService: PostsService
   ) {}
 
-  ngOnInit() {
-  }
+  public get title() { return this.postForm.get('title'); }
+  public get content() { return this.postForm.get('content'); }
+  public get description() { return this.postForm.get('description'); }
 
   fileProgress(fileInput: any) {
     this.frontImage = <File>fileInput.target.files[0];
@@ -68,7 +69,7 @@ export class CreatePostComponent implements OnInit {
     };
   }
 
-  uploadImage(imageFile) {
+  async uploadImage(imageFile) {
     if(!imageFile) {
       return new Observable(observer => observer.next({}));
     }
@@ -80,10 +81,10 @@ export class CreatePostComponent implements OnInit {
     const formData = new FormData();
     formData.append('image', imageFile);
 
-    return this.http.post('http://localhost:4202/posts/image', formData) 
+    return this.postsService.uploadImage(formData);
   }
 
-  uploadMultipleImages(arrImageFiles) {
+  async uploadMultipleImages(arrImageFiles) {
     if(arrImageFiles.length === 0) {
       return new Observable(observer => observer.next([]));
     }
@@ -98,30 +99,41 @@ export class CreatePostComponent implements OnInit {
       formData.append('gallery[]', image, image.name);
     });
 
-    return this.http.post('http://localhost:4202/posts/images', formData);
+    return this.postsService.uploadGalleryImages(formData);
+  } 
+
+  removeFrontImage() {
+    this.frontImage = null;
+    this.previewUrl = null;
   }
 
-  onSubmit() {
-    console.log('Gallery', this.galleryImages);
-    console.log('frontImage', this.frontImage);
-    console.log('formata', this.postForm);
-    console.log('----------------------');
-    this.uploadMultipleImages(this.galleryImages).subscribe((galleryRes) => {
-      
-      console.log(galleryRes);
-      this.postForm.controls['gallery'].setValue(galleryRes);
-      
-      this.uploadImage(this.frontImage).subscribe(imageRes => {
-        this.postForm.controls['frontImage'].setValue(imageRes);
+  async onSubmit() {
+    this.submitted = true;
 
-        this.http.post('http://localhost:4202/posts', this.postForm.value).subscribe(postRes => {
-          // this.router.navigate([`blog/post/${postRes['id']}`]);
+    if(this.postForm.valid) {
+
+      if(this.galleryImages.length > 0) {
+        this.galleryImages = await this.uploadMultipleImages(this.galleryImages);
+      }
+
+
+
+
+      this.uploadMultipleImages(this.galleryImages).subscribe((galleryRes) => {
+        this.postForm.controls['gallery'].setValue(galleryRes);
+  
+        this.uploadImage(this.frontImage).subscribe(imgRes => {
+          this.postForm.controls['frontImage'].setValue(imgRes);
+  
+          this.postsService.createPost(this.postForm.value).subscribe(postRes => {
+            this.router.navigate([`blog/post/${postRes['id']}`]);
+          });
         });
+      },
+      (err) => {
+        this.notificator.error('There was problem with uploading the gallery images.');
       });
-    },
-    (err) => {
-      this.notificator.error('There was problem with uploading the gallery images.');
-    });
+    }
   }
 
   changeGalleryFiles(pictures) {
@@ -130,16 +142,16 @@ export class CreatePostComponent implements OnInit {
 
   // Validation For Images
   validateFile(file) {
-    if (!!file && file['size'] > 5024000) {
-      this.notificator.error("File can not be larger than 5 MB");
+    if (!!file && file['size'] > 10000000) {
+      this.notificator.error("File can not be larger than 10 MB");
       
-       return false;
+      return false;
     }
 
     if (!!file && !this.validImageExtentions.includes(file['type'])) {
-       this.notificator.error("Invalid file format.");
+      this.notificator.error("Invalid file format.");
        
-       return false;
+      return false;
     }
 
     return true;

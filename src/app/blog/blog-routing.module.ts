@@ -5,10 +5,11 @@ import { PostsResolverService } from './services/post-resolver.service';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { SinglePostResolverService } from './services/single-post-resolver.service';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   { path: '', component: AllPostsComponent, pathMatch: 'full', resolve: {posts: PostsResolverService } },
-  { path: 'create-post', component: CreatePostComponent, },
+  { path: 'create-post', component: CreatePostComponent, canActivate: [AuthGuard] },
   { path: 'post/:id', component: SinglePostComponent, resolve: {post: SinglePostResolverService }}
 ];
 

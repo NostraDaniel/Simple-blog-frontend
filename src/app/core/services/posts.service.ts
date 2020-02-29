@@ -51,6 +51,22 @@ export class PostsService {
     return this.http.get<IPost[]>('http://localhost:4202/posts/newest');
   }
 
+  public createPost(postData) {
+    return this.http.post('http://localhost:4202/posts', postData);
+  }
+
+  public updatePost(updatedData) {
+    return this.http.put('http://localhost:4202/posts', updatedData);
+  }
+
+  public async uploadImage(image) {
+    return this.http.post('http://localhost:4202/posts/image', image).toPromise();
+  }
+
+  public async uploadGalleryImages(images) {
+    return this.http.post('http://localhost:4202/posts/images', images).toPromise();
+  }
+
   public delete(id: string): Observable<any> {
     console.log(id);
     return this.http.delete(`http://localhost:4202/posts/${id}`);

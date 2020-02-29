@@ -17,3 +17,53 @@ h4 {
 .container-contact100-form-btn {
   justify-content: left;
 }
+
+.validation {
+  margin-bottom: 15px;
+}
+
+.preview {
+  display: block;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+}
+
+#upload-label {
+  padding: 10px 15px;
+  border-radius: 10px;
+  color: #fff;
+  background: #DE9A86;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 180px;
+  transition: 0.3s all ease-in-out;
+
+  mat-icon {
+    margin-right: 10px;
+  }
+
+  &:hover, &:focus {
+    background: #BF6D54;
+  }
+}
+
+.custom-file-input {
+  display: none;
+}
+
+.close-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border-radius: 50%;
+  z-index: 1;
+  background: white;
+  cursor: pointer;
+}

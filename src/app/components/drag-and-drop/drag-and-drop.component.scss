@@ -32,24 +32,17 @@ $hover: #DE9A86;
 }
 
 .files-list {
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  margin: 10px 0;
-  background: #ffffff;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 10px 10px 0 0 ;
   border: 1px dashed;
   border-radius: 12px;
   padding: 5px;
   color: $border-color;
-
-  p {
-    max-width: 250px;
-    overflow: hidden;
-  }
-
-  mat-icon {
-    color: $hover;
-  }
 }
 
 .files-list .delete-file {
@@ -60,4 +53,18 @@ $hover: #DE9A86;
 
 .files-list .delete-file img {
   width: 30px;
+}
+
+.close-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 0;
+  top: 3px;
+  right: 3px;
+  border-radius: 50%;
+  z-index: 1;
+  background: white;
+  cursor: pointer;
 }

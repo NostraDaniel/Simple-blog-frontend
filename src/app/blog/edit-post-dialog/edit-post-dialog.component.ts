@@ -1,17 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UploadAdapter } from 'src/app/common/classes/upload-adapter';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-
-// export interface DialogData {
-//   animal: string;
-//   name: string;
-// }
+import { IImage } from 'src/app/common/interfaces/image';
+import { PostsService } from 'src/app/core/services/posts.service';
 
 @Component({
   selector: 'app-edit-post-dialog',
@@ -20,9 +17,10 @@ import { HttpClient } from '@angular/common/http';
 })
 export class EditPostDialogComponent implements OnInit {
 
-  public frontImage: File = null;
-  public galleryImages: File[] = [];
-  public previewUrl:any = null;
+  public frontImage: any = null;
+  public galleryImages: any[] = [];
+  private deletedGalleryImages: IImage[] = [];
+  public previewUrl: any = null;
   public fileUploadProgress: string = null;
   public uploadedFilePath: string = null;
   private validImageExtentions: string[] = ['image/jpeg', 'image/jpg', 'image/png','image/gif'];
@@ -30,13 +28,14 @@ export class EditPostDialogComponent implements OnInit {
   public editor = ClassicEditor;
   public postForm = this.fb.group({
     isPublished:[false],
-    title: [''],
-    content: [''],
-    description: [''],
+    title: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    content: ['', [ Validators.required, Validators.minLength(15),Validators.maxLength(10000)]],
+    description: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
     isFrontPage: [false],
     frontImage: [''],
     gallery: ['']
   });
+  public submitted: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<EditPostDialogComponent>,
@@ -45,21 +44,23 @@ export class EditPostDialogComponent implements OnInit {
     public readonly http: HttpClient,
     private readonly notificator: NotificatorService,
     private readonly router: Router,
+    private readonly postsService: PostsService
     ) {}
 
   ngOnInit() {
     console.log(this.data);
-    // this.postForm.controls['frontImage'].setValue(imageRes);
     for (const key in this.data) {
       if(
         key === 'id' ||
         key === 'gallery' ||
         key === 'frontImage' ||
-        key === 'createdOn'
+        key === 'createdOn' ||
+        key === '__frontImage__' ||
+        key === '__gallery__'
         ) {
         continue;
       }
-      console.log(this.data[key], key);
+
       this.postForm.controls[key].setValue(this.data[key]);
     }
   }
@@ -102,7 +103,7 @@ export class EditPostDialogComponent implements OnInit {
     const formData = new FormData();
     formData.append('image', imageFile);
 
-    return this.http.post('http://localhost:4202/posts/image', formData) 
+    return this.postsService.uploadImage(formData) 
   }
 
   uploadMultipleImages(arrImageFiles) {
@@ -113,6 +114,10 @@ export class EditPostDialogComponent implements OnInit {
     const formData = new FormData();
     
     arrImageFiles.forEach(image => {
+      if(image.hasOwnProperty('id')) {
+        return;
+      }
+
       if(!this.validateFile(image)) {
         return;
       }
@@ -120,39 +125,68 @@ export class EditPostDialogComponent implements OnInit {
       formData.append('gallery[]', image, image.name);
     });
 
-    return this.http.post('http://localhost:4202/posts/images', formData);
+    return this.postsService.uploadGalleryImages(formData);
   }
 
   onSubmit() {
-    this.uploadMultipleImages(this.galleryImages).subscribe((galleryRes) => {
-      this.postForm.controls['gallery'].setValue(galleryRes);
-      
-      this.uploadImage(this.frontImage).subscribe(imageRes => {
-        this.postForm.controls['frontImage'].setValue(imageRes);
+    this.submitted = true;
 
-        this.http.post('http://localhost:4202/posts', this.postForm.value).subscribe(postRes => {
-          this.router.navigate([`blog/post/${postRes['id']}`]);
+    if(this.postForm.valid) {
+      const newImgGallery = this.galleryImages.filter(img => !img.hasOwnProperty('id'));
+
+      this.uploadMultipleImages(newImgGallery).subscribe((galleryRes) => {
+        debugger;
+        const joinedImgArrays = this.galleryImages.filter(img => img.hasOwnProperty('id')).concat(galleryRes);
+        console.log('joinnata galeriq', joinedImgArrays);
+        this.postForm.controls['gallery'].setValue(joinedImgArrays);
+
+        this.uploadImage(this.frontImage).subscribe(imageRes => {
+          this.postForm.controls['frontImage'].setValue(imageRes);
+
+
+          console.log('sendvane na forma', this.postForm.value);
+          this.postsService.updatePost(this.postForm.value).subscribe(postRes => {
+            this.router.navigate([`blog/post/${postRes['id']}`]);
+            this.notificator.success('Edit was successful!');
+            this.dialogRef.close();
+          },
+          (errPost) => {
+            this.notificator.error('There was problem with uploading your form.');
+            this.dialogRef.close();
+          });
+        },
+        (errFrontImg) => {
+          this.notificator.error('There was problem with uploading your front image.');
+          this.dialogRef.close();
         });
+      },
+      (errGallery) => {
+        this.notificator.error('There was problem with uploading the gallery images.');
+        this.dialogRef.close();
       });
-    });
+    }
   }
 
   changeGalleryFiles(pictures) {
     this.galleryImages = pictures;
   }
 
+  addDeledetImg(deletedPictures) {
+    this.deletedGalleryImages = deletedPictures;
+  }
+
   // Validation For Images
   validateFile(file) {
-    if (!!file && file['size'] > 5024000) {
-      this.notificator.error("File can not be larger than 5 MB");
+    if (!!file && file['size'] > 10000000) {
+      this.notificator.error("File can not be larger than 10 MB");
       
-       return false;
+      return false;
     }
 
     if (!!file && !this.validImageExtentions.includes(file['type'])) {
-       this.notificator.error("Invalid file format.");
+      this.notificator.error("Invalid file format.");
        
-       return false;
+      return false;
     }
 
     return true;

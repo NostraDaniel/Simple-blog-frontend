@@ -1,6 +1,7 @@
 $background-color : #E6E3C9;
 $link-color: #BF6D54;
 $text-color: #3a3a3a;
+$error: #8C2A09;
 
 #footer {
   margin-top: 70px;
@@ -143,5 +144,20 @@ $text-color: #3a3a3a;
         }
       }
     }
+  }
+}
+
+.validation {
+  display: block;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+
+  span{
+    display: block;
+    font-size: 14px;
+    color: $error;
   }
 }

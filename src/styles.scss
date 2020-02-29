@@ -397,7 +397,7 @@ main {
   width: 100%;
   position: relative;
   border-bottom: 1px solid #dbdbdb;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
 }
 
 .label-input100 {
@@ -537,6 +537,6 @@ textarea.input100 {
   z-index: 1 !important;
 }
 
-.fixed-top {
-
+.carousel-control-next {
+  z-index: 99;
 }

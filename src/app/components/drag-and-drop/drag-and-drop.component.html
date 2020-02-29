@@ -2,9 +2,8 @@
   <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
   <mat-icon aria-hidden="false" aria-label="Example home icon">cloud</mat-icon>
 </div>
-<div class="files-list" *ngFor="let file of files;let i= index">
-  <p> {{ file.name }} </p>
-  <button class="delete-file" (click)="deleteAttachment(i)">
-      <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
+<div class="files-list" *ngFor="let imgUrl of imgPreviewArr;let i= index"  [ngStyle]="{'background-image': 'url(' + imgUrl + ')'}">
+  <button class="close-cont" (click)="deleteAttachment(i)">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
   </button>
 </div>

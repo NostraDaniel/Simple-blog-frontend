@@ -16,6 +16,12 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptorService } from './auth/token-interceptor.service';
+import { ServerErrorInterceptor } from './common/interceptors/server-error.interceptor';
+import { ServerErrorComponent } from './components/server-error/server-error.component';
+import { SpinnerInterceptor } from './common/interceptors/spinner.interceptor';
+import { AuthTokenInterceptor } from './common/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +34,8 @@ import { SharedModule } from './shared/shared.module';
     ProceduresComponent,
     ContactComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +45,23 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true
+    },    
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ServerErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

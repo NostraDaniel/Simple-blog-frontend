@@ -1,6 +1,6 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
 <h1 mat-dialog-title>Edit</h1>
 <div class="dialog-content" mat-dialog-content>
-  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
 
     <label for="title">Title</label>
     <div class="wrap-input100 validate-input">
@@ -37,11 +37,11 @@
         <label gallery>
           Gallery
         </label>
-      <app-drag-and-drop (filesEvent)='changeGalleryFiles($event)'></app-drag-and-drop>
+      <app-drag-and-drop [galleryFilesEdit]="data.__gallery__" (filesEvent)='changeGalleryFiles($event)' (deletedImgEvent)="addDeletedImg($event)"></app-drag-and-drop>
     </div>
+  </div>
+  <div mat-dialog-actions>
+    <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
+    <button action="submit"  mat-button  cdkFocusInitial>Edit</button>
+  </div>
 </form>
-</div>
-<div mat-dialog-actions>
-  <!-- <button mat-button (click)="onNoClick()">No Thanks</button> -->
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Edit</button>
-</div>

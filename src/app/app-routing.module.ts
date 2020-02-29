@@ -6,6 +6,7 @@ import { ProceduresComponent } from './components/procedures/procedures.componen
 import { ContactComponent } from './components/contact/contact.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { ServerErrorComponent } from './components/server-error/server-error.component';
 // import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'blog', loadChildren: './blog/blog.module#BlogModule' },
   // { path: 'posts', loadChildren: './posts/posts.module#PostsModule', canActivate: [AuthGuard] },
+  { path: 'server-error', component: ServerErrorComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: '**', redirectTo: '/not-found' }
 ];

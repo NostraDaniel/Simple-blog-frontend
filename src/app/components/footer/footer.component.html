@@ -21,35 +21,70 @@
           <app-newest-posts></app-newest-posts>
         </div>
         <div class="col col-lg-3">
-          <h4>Пишете ни</h4>
+          <h4>Contact us</h4>
           <form class="contact100-form validate-form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
             <div class="wrap-input100 validate-input">
-              
-              <input class="input100" type="text"  formControlName="name" placeholder="Вашето име">
+              <input class="input100" type="text"  formControlName="name" placeholder="Name">
               <span class="focus-input100"></span>
-              
             </div>
 
             <div class="wrap-input100 validate-input">
-              <input class="input100" type="text" formControlName="email" placeholder="Вашият и-мейл">
+              <input class="input100" type="text" formControlName="email" placeholder="Your email">
               <span class="focus-input100"></span>
             </div>
 
             <div class="wrap-input100">
-              <input class="input100" type="text" formControlName="phone" placeholder="Относно">
+              <input class="input100" type="text" formControlName="topic" placeholder="Topic">
               <span class="focus-input100"></span>
             </div>
 
             <div class="wrap-input100 validate-input">
-              <textarea class="input100" formControlName="message" placeholder="Вашето съобщение"></textarea>
+              <textarea class="input100" formControlName="message" placeholder="Message"></textarea>
               <span class="focus-input100"></span>
             </div>
-
+            <div *ngIf="submitted" class="validation">
+              <div *ngIf="name.invalid">
+                <span *ngIf="name.errors.required">
+                  Name is required!
+                </span>
+                <span *ngIf="name.errors.minlength  && (name.dirty || name.touched)">
+                  Name has to be at least 4 charecters long!
+                </span>
+              </div>
+              <div *ngIf="email.invalid">
+                <span *ngIf="email.errors.required">
+                  Email is required!
+                </span>
+                <span *ngIf="email.errors.minlength && (email.dirty || email.touched)">
+                  Email has to be at least 8 charecters long!
+                </span>
+                <span *ngIf="email.errors.email && (email.dirty || email.touched)">
+                  Email field has to contain valid email address!
+                </span>
+              </div>
+              <div *ngIf="topic.invalid">
+                <span *ngIf="topic.errors.required">
+                  Topic is required!
+                </span>
+              </div>
+              <div *ngIf="message.invalid">
+                <span *ngIf="message.errors.required">
+                  Message is required!
+                </span>
+                <span *ngIf="message.errors.minlength && (message.dirty || message.touched)">
+                  Message has to be at least 10 charecters long!
+                </span>
+                <span *ngIf="message.errors.maxlength && (message.dirty || message.touched)">
+                  Message has to be at least 2000 charecters long!
+                </span>
+              </div>
+            </div>
             <div class="container-contact100-form-btn">
               <div class="wrap-contact100-form-btn">
                 <div class="contact100-form-bgbtn"></div>
-                <button class="contact100-form-btn" action="submit">
-                  Изпрати
+                <!-- [disabled]="!emailForm.valid" -->
+                  <button class="contact100-form-btn"  action="submit">
+                  Send
                 </button>
               </div>
             </div>
