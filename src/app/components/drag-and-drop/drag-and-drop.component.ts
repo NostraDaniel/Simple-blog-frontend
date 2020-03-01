@@ -10,10 +10,10 @@ export class DragAndDropComponent implements OnInit {
 
   @Output() public filesEvent = new EventEmitter<any[]>();
   @Output() public deletedImgEvent = new EventEmitter< IImage[]>();
-  @Input() public galleryFilesEdit: IImage[];
+  @Input() public galleryFilesEdit: IImage[] = [];
   public files: any[] = [];
   public imgPreviewArr: any[] = [];
-  private deletedImg: IImage[];
+  private deletedImg: IImage[] = [];
 
   constructor() { }
 

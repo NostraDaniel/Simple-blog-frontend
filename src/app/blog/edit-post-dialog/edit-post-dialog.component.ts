@@ -20,6 +20,7 @@ export class EditPostDialogComponent implements OnInit {
   public frontImage: any = null;
   public galleryImages: any[] = [];
   private deletedGalleryImages: IImage[] = [];
+  private deletedFrontImage: any = {};
   public previewUrl: any = null;
   public fileUploadProgress: string = null;
   public uploadedFilePath: string = null;
@@ -33,7 +34,9 @@ export class EditPostDialogComponent implements OnInit {
     description: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
     isFrontPage: [false],
     frontImage: [''],
-    gallery: ['']
+    gallery: [''],
+    deletedFrontImage: [''],
+    deletedGalleryImages: [''],
   });
   public submitted: boolean = false;
 
@@ -46,6 +49,10 @@ export class EditPostDialogComponent implements OnInit {
     private readonly router: Router,
     private readonly postsService: PostsService
     ) {}
+    
+  public get title() { return this.postForm.get('title'); }
+  public get content() { return this.postForm.get('content'); }
+  public get description() { return this.postForm.get('description'); }
 
   ngOnInit() {
     console.log(this.data);
@@ -63,9 +70,20 @@ export class EditPostDialogComponent implements OnInit {
 
       this.postForm.controls[key].setValue(this.data[key]);
     }
+
+    const frontImage = this.data['__frontImage__'];
+
+    if(!!frontImage && frontImage.hasOwnProperty('id')) {
+      this.frontImage = frontImage;
+      this.previewUrl = frontImage.src;
+    }
   }
 
   fileProgress(fileInput: any) {
+    if(!!this.frontImage && this.frontImage.hasOwnProperty('id')) {
+      this.deletedFrontImage = this.frontImage;
+    }
+
     this.frontImage = <File>fileInput.target.files[0];
     this.preview();
   }
@@ -94,6 +112,10 @@ export class EditPostDialogComponent implements OnInit {
   uploadImage(imageFile) {
     if(!imageFile) {
       return new Observable(observer => observer.next({}));
+    }
+
+    if(imageFile.hasOwnProperty('id')) {
+      return new Observable(observer => observer.next(imageFile));
     }
 
     if(!this.validateFile(imageFile)) {
@@ -128,6 +150,15 @@ export class EditPostDialogComponent implements OnInit {
     return this.postsService.uploadGalleryImages(formData);
   }
 
+  removeFrontImage() {
+    if(this.frontImage.hasOwnProperty('id')) {
+      this.deletedFrontImage = this.frontImage;
+    }
+
+    this.frontImage = null;
+    this.previewUrl = null;
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -135,18 +166,16 @@ export class EditPostDialogComponent implements OnInit {
       const newImgGallery = this.galleryImages.filter(img => !img.hasOwnProperty('id'));
 
       this.uploadMultipleImages(newImgGallery).subscribe((galleryRes) => {
-        debugger;
         const joinedImgArrays = this.galleryImages.filter(img => img.hasOwnProperty('id')).concat(galleryRes);
-        console.log('joinnata galeriq', joinedImgArrays);
         this.postForm.controls['gallery'].setValue(joinedImgArrays);
 
         this.uploadImage(this.frontImage).subscribe(imageRes => {
           this.postForm.controls['frontImage'].setValue(imageRes);
+          this.postForm.controls['deletedFrontImage'].setValue(this.deletedFrontImage);
+          this.postForm.controls['deletedGalleryImages'].setValue(this.deletedGalleryImages);
 
-
-          console.log('sendvane na forma', this.postForm.value);
-          this.postsService.updatePost(this.postForm.value).subscribe(postRes => {
-            this.router.navigate([`blog/post/${postRes['id']}`]);
+          this.postsService.updatePost(this.postForm.value, this.data.id).subscribe(postRes => {
+            // this.router.navigate([`blog/post/${postRes['id']}`]);
             this.notificator.success('Edit was successful!');
             this.dialogRef.close();
           },
@@ -171,12 +200,12 @@ export class EditPostDialogComponent implements OnInit {
     this.galleryImages = pictures;
   }
 
-  addDeledetImg(deletedPictures) {
+  addDeletedImg(deletedPictures) {
     this.deletedGalleryImages = deletedPictures;
   }
 
   // Validation For Images
-  validateFile(file) {
+  validateFile(file): boolean {
     if (!!file && file['size'] > 10000000) {
       this.notificator.error("File can not be larger than 10 MB");
       
@@ -190,5 +219,9 @@ export class EditPostDialogComponent implements OnInit {
     }
 
     return true;
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }

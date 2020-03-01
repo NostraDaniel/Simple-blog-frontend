@@ -55,16 +55,16 @@ export class PostsService {
     return this.http.post('http://localhost:4202/posts', postData);
   }
 
-  public updatePost(updatedData) {
-    return this.http.put('http://localhost:4202/posts', updatedData);
+  public updatePost(updatedData,id) {
+    return this.http.put(`http://localhost:4202/posts/${id}`, updatedData);
   }
 
-  public async uploadImage(image) {
-    return this.http.post('http://localhost:4202/posts/image', image).toPromise();
+  public uploadImage(image) {
+    return this.http.post('http://localhost:4202/posts/image', image);
   }
 
-  public async uploadGalleryImages(images) {
-    return this.http.post('http://localhost:4202/posts/images', images).toPromise();
+  public uploadGalleryImages(images) {
+    return this.http.post('http://localhost:4202/posts/images', images);
   }
 
   public delete(id: string): Observable<any> {

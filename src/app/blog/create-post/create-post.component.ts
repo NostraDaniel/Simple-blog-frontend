@@ -69,7 +69,7 @@ export class CreatePostComponent {
     };
   }
 
-  async uploadImage(imageFile) {
+  uploadImage(imageFile) {
     if(!imageFile) {
       return new Observable(observer => observer.next({}));
     }
@@ -84,7 +84,7 @@ export class CreatePostComponent {
     return this.postsService.uploadImage(formData);
   }
 
-  async uploadMultipleImages(arrImageFiles) {
+  uploadMultipleImages(arrImageFiles) {
     if(arrImageFiles.length === 0) {
       return new Observable(observer => observer.next([]));
     }
@@ -107,18 +107,10 @@ export class CreatePostComponent {
     this.previewUrl = null;
   }
 
-  async onSubmit() {
+  onSubmit() {
     this.submitted = true;
 
     if(this.postForm.valid) {
-
-      if(this.galleryImages.length > 0) {
-        this.galleryImages = await this.uploadMultipleImages(this.galleryImages);
-      }
-
-
-
-
       this.uploadMultipleImages(this.galleryImages).subscribe((galleryRes) => {
         this.postForm.controls['gallery'].setValue(galleryRes);
   
