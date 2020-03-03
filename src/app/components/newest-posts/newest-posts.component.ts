@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IPost } from 'src/app/common/interfaces/post';
 import { PostsService } from 'src/app/core/services/posts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-newest-posts',
@@ -14,7 +15,8 @@ export class NewestPostsComponent implements OnInit, OnDestroy {
   public newestPosts: IPost[];
   
   constructor(
-    private readonly postsService: PostsService
+    private readonly postsService: PostsService,
+    private readonly router: Router
   ) { }
 
   ngOnInit() {
@@ -23,6 +25,11 @@ export class NewestPostsComponent implements OnInit, OnDestroy {
         this.newestPosts = posts;
       }
     )
+  }
+
+
+  showPost(id: string): void {
+    this.router.navigate([`/blog/post/${id}`]);
   }
 
   ngOnDestroy() {

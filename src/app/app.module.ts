@@ -17,7 +17,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { ServerErrorInterceptor } from './common/interceptors/server-error.interceptor';
 import { ServerErrorComponent } from './components/server-error/server-error.component';
 import { SpinnerInterceptor } from './common/interceptors/spinner.interceptor';
@@ -35,7 +34,7 @@ import { AuthTokenInterceptor } from './common/interceptors/auth.interceptor';
     ContactComponent,
     LoginComponent,
     RegisterComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +42,7 @@ import { AuthTokenInterceptor } from './common/interceptors/auth.interceptor';
     FormsModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     {

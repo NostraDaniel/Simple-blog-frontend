@@ -81,7 +81,7 @@ import { PostOptionsComponent } from '../blog/post-options/post-options.componen
     MatPaginatorModule,
     NgxSpinnerModule,
     MDBBootstrapModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
 
   exports: [
@@ -117,7 +117,6 @@ import { PostOptionsComponent } from '../blog/post-options/post-options.componen
     MatGridListModule,
     MatSortModule,
     MatDialogModule,
-    MatTabsModule,
     MatPaginatorModule,
     NgxSpinnerModule,
     PostCardComponent,
@@ -127,7 +126,8 @@ import { PostOptionsComponent } from '../blog/post-options/post-options.componen
     DragDropDirective,
     SidebarComponent,
     NewestPostsComponent,
-    PostOptionsComponent
+    PostOptionsComponent,
+    MatSidenavModule
   ]
 })
 export class SharedModule {}

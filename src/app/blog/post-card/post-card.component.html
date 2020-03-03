@@ -11,7 +11,7 @@
       <div class="card-img-top img-loaded" (click)="showPost(post.id)"></div>
     </ng-template>
  
-    <a href="/blog/post/{{post.id}}">
+    <a (click)="showPost(post.id)">
       <div class="mask rgba-white-slight waves-effect waves-light"></div>
     </a>
   </div>
@@ -27,6 +27,6 @@
     </mdb-card-text>
 
     <a (click)="showPost(post.id)"  mdbBtn class="blog-btn" mdbWavesEffect>Read more</a>
-    <app-post-options (deleteOptionEvent)='delete($event)' [post]="post"></app-post-options>
+    <app-post-options (deleteOptionEvent)='delete($event)' (editPostEvent)="editPost($event)" [post]="post"></app-post-options>
   </mdb-card-body>
 </mdb-card>

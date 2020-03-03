@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UploadAdapter } from 'src/app/common/classes/upload-adapter';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { IImage } from 'src/app/common/interfaces/image';
@@ -29,7 +28,7 @@ export class EditPostDialogComponent implements OnInit {
   public editor = ClassicEditor;
   public postForm = this.fb.group({
     isPublished:[false],
-    title: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+    title: ['', [ Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
     content: ['', [ Validators.required, Validators.minLength(15),Validators.maxLength(10000)]],
     description: ['', [ Validators.required, Validators.minLength(5), Validators.maxLength(1000)]],
     isFrontPage: [false],
@@ -46,7 +45,6 @@ export class EditPostDialogComponent implements OnInit {
     private readonly fb: FormBuilder,
     public readonly http: HttpClient,
     private readonly notificator: NotificatorService,
-    private readonly router: Router,
     private readonly postsService: PostsService
     ) {}
     
@@ -55,7 +53,6 @@ export class EditPostDialogComponent implements OnInit {
   public get description() { return this.postForm.get('description'); }
 
   ngOnInit() {
-    console.log(this.data);
     for (const key in this.data) {
       if(
         key === 'id' ||
@@ -175,12 +172,15 @@ export class EditPostDialogComponent implements OnInit {
           this.postForm.controls['deletedGalleryImages'].setValue(this.deletedGalleryImages);
 
           this.postsService.updatePost(this.postForm.value, this.data.id).subscribe(postRes => {
-            // this.router.navigate([`blog/post/${postRes['id']}`]);
             this.notificator.success('Edit was successful!');
-            this.dialogRef.close();
+            this.dialogRef.close(postRes);
           },
           (errPost) => {
-            this.notificator.error('There was problem with uploading your form.');
+            errPost.error.message.forEach(errObj=> {
+              for (const key in errObj.constraints) {
+                this.notificator.error(errObj.constraints[key]);
+              }
+            });
             this.dialogRef.close();
           });
         },

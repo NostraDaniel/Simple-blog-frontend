@@ -22,8 +22,12 @@ export class PostCardComponent implements OnInit {
     this.router.navigate([`/blog/post/${id}`]);
   }
 
-  delete(id: string):void {
+  delete(id: string): void {
     this.deleteCardEvent.emit(id);
+  }
+
+  editPost(editedPost): void {
+    this.post = editedPost;
   }
 }
 

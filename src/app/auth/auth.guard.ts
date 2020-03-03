@@ -25,6 +25,6 @@ export class AuthGuard implements CanActivate {
           this.notificatorService.error(`You're unauthorized to access this page!`);
         }
       })
-      );
+    );
   }
 }

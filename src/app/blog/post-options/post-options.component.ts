@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { IPost } from 'src/app/common/interfaces/post';
 import { EditPostDialogComponent } from '../edit-post-dialog/edit-post-dialog.component';
@@ -8,17 +8,15 @@ import { EditPostDialogComponent } from '../edit-post-dialog/edit-post-dialog.co
   templateUrl: './post-options.component.html',
   styleUrls: ['./post-options.component.scss']
 })
-export class PostOptionsComponent implements OnInit {
+export class PostOptionsComponent {
 
   @Input() post: IPost;
   @Output() public deleteOptionEvent: EventEmitter<any> = new EventEmitter();
+  @Output() public editPostEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(
     public dialog: MatDialog
     ) { }
-
-  ngOnInit() {
-  }
 
   editPost(post: IPost): void {
     const dialogRef = this.dialog.open(EditPostDialogComponent, {
@@ -28,8 +26,11 @@ export class PostOptionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+      if(!result) {
+        return;
+      }
+
+      this.editPostEvent.emit(result);
     });
   }
 

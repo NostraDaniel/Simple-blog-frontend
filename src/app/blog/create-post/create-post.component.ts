@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
@@ -119,7 +119,17 @@ export class CreatePostComponent {
   
           this.postsService.createPost(this.postForm.value).subscribe(postRes => {
             this.router.navigate([`blog/post/${postRes['id']}`]);
+          },
+          (err) => {
+            err.error.message.forEach(errObj=> {
+              for (const key in errObj.constraints) {
+                this.notificator.error(errObj.constraints[key]);
+              }
+            });
           });
+        },
+        (err) => {
+          this.notificator.error('There was problem with uploading your front image.');
         });
       },
       (err) => {
