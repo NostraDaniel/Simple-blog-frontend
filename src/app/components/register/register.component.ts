@@ -27,10 +27,12 @@ export class RegisterComponent implements OnInit {
             this.notificator.success(`Welcome, ${response.user.name}!`);
             this.router.navigate(['home']);
           },
-          error => this.notificator.error(error.message),
+          error => this.notificator.error('There was problem logging you in!'),
         );
       },
-      error => this.notificator.error(error.message),
+      error => {
+        this.notificator.error(error.error);
+      },
     );
   }
 

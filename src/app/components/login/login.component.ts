@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.services';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
 import { Router } from '@angular/router';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,9 @@ export class LoginComponent implements OnInit {
         this.notificator.success(`Welcome, ${result.user.name}!`);
         this.routed.navigate(['home']);
       },
-      error => this.notificator.error(error.message),
+      (error) => {
+        this.notificator.error(error.error);
+      },
     );
   }
 
