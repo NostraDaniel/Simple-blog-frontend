@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.services';
 import { NotificatorService } from 'src/app/core/services/notificator.service';
 import { Router } from '@angular/router';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-login',
