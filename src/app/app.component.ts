@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private subscriptionAuth: Subscription;
   private subscriptionPosts: Subscription;
   public newestPosts: IPost[];
+  public showMenu: boolean = false;
 
   constructor(
     private readonly notificator: NotificatorService,
@@ -46,6 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptionAuth.unsubscribe();
     this.subscriptionPosts.unsubscribe();
+  }
+
+  toggleMobile() {
+    this.showMenu = !this.showMenu;
   }
 
   logout() {

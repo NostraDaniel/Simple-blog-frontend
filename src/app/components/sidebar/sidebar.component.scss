@@ -1,14 +1,16 @@
 .wrapper {
   position: relative;
 
-  &:before {
-    content: "";
-    height: 110%;
-    width: 1px;
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    background:#dbdbdb;
+  @media screen and(min-width: 767px){
+    &:before {
+      content: "";
+      height: 110%;
+      width: 1px;
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      background:#dbdbdb;
+    }
   }
 }
 
@@ -29,5 +31,11 @@
 
   .wrap-input100 {
     margin-bottom: 0;
+  }
+}
+
+.sidebar-news {
+  @media screen and(max-width:767px){
+    display: none;
   }
 }

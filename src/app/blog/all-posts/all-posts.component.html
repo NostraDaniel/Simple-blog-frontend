@@ -1,10 +1,10 @@
 <main>
     <div class="container">
-      <div class="row">
-        <div class="col col-lg-9">
+      <div class="row all-posts-container">
+        <div class="col-12 col-md-8 col-lg-9">
           <div class="heading-cont space-center">
             <h1>Posts</h1>
-            <a *ngIf="isLogged" mat-button routerLink="/blog/create-post" class="create-btn">Create post</a>
+            <a *ngIf="isLogged" mat-button routerLink="/blog/create-post" class="blog-btn create-btn">Create post</a>
           </div>
           
           <div class="row">
@@ -12,7 +12,7 @@
               <h3>Currently no posts available</h3>
             </div>
 
-            <div class="col-lg-6" *ngFor="let post of posts">
+            <div class="col-12 col-sm-6 col-md-12 col-lg-6" *ngFor="let post of posts">
               <app-post-card (deleteCardEvent)='delete($event)' [post]="post"></app-post-card>
             </div>
 
@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <div class="col col-lg-3">
+        <div class="col-12 col-md-4 col-lg-3 sidebar-container">
           <app-sidebar (searchEvent)='search($event)'></app-sidebar>
         </div>
       </div>

@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostsService } from 'src/app/core/services/posts.service';
 import { IPost } from 'src/app/common/interfaces/post';
 import { Lightbox } from 'ngx-lightbox';
-import { Subscription } from 'rxjs';
 import { IMasonryGalleryImage } from 'ngx-masonry-gallery';
 
 @Component({

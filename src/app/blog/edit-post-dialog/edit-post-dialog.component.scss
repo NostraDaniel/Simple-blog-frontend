@@ -60,3 +60,13 @@
   background: white;
   cursor: pointer;
 }
+
+.close-btn {
+  border-radius: 10px;
+  // background: #DE9A86;
+  transition: 0.3s all ease-in-out;
+  
+  &:hover, &:focus {
+    color: #BF6D54;
+  }
+}

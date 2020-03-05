@@ -4,10 +4,13 @@ $text-color: #3a3a3a;
 $error: #8C2A09;
 
 #footer {
-  margin-top: 70px;
-  padding-top: 50px;
+  padding-top: 40px;
   background: rgba(230,227,201,0.4);
   border-top: 1px solid #DE9A86;
+
+  @media screen and(min-width: 640px){
+    padding-top: 50px;
+  }
 
   h4 {
     color: #3a3a3a;
@@ -17,6 +20,12 @@ $error: #8C2A09;
   }
 
   .contacts {
+    padding-bottom: 20px;
+    
+    @media screen and(min-width: 640px){
+      padding-bottom: 0;
+    }
+
     p {
       color: $text-color;
       font-size: 13px;
@@ -30,7 +39,7 @@ $error: #8C2A09;
         transition: 0.3s all ease-in-out;
         text-decoration: none;
 
-        &:hover {
+        &:hover, &:focus {
           color: $link-color;
         }
       }
@@ -63,13 +72,19 @@ $error: #8C2A09;
         }
       }
 
+      &.current {
+        a {
+          color: $link-color;
+        }
+      }
+
       a {
         color: #888888;
         font-size: 13px;
         font-weight: 400;
         transition: 0.3s all ease-in-out;
 
-        &:hover {
+        &:hover, &:focus {
           color: $link-color;
         }
       }
@@ -137,7 +152,7 @@ $error: #8C2A09;
             color: $link-color;
             text-decoration: none;
 
-            &:hover {
+            &:hover, &:focus {
               text-decoration: underline;
             }
           }
@@ -160,4 +175,24 @@ $error: #8C2A09;
     font-size: 14px;
     color: $error;
   }
+}
+
+.footer-menu {
+  display: none;
+  
+  @media screen and(min-width:992px){
+    display: block;
+  }
+}
+
+.newest-posts {
+  display: none;
+
+  @media screen and(min-width:992px){
+    display: block;
+  }
+}
+
+.row.center {
+  justify-content: center;
 }

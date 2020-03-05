@@ -4,6 +4,7 @@
       <div class="row">
 
         <div class="col col-lg-12">
+          <a mat-button routerLink="/blog" class="blog-btn">Back</a>
           <div class="heading-cont left">
             <h1>
               Create Post
@@ -11,100 +12,101 @@
           </div>
         </div>
 
-        <div class="col col-lg-5">
+        <div class="col-12 col-lg-5">
           <div class="row">
-            <div class="col col-lg-12">
+            <div class="col-12 col-lg-12">
               <div class="wrap-input100 validate-input">
                 <input class="input100" type="text" formControlName="title" placeholder="Title">
                 <span class="focus-input100"></span>
               </div>
             </div>
-            <div class="col col-lg-12">
+            <div class="col-12 col-lg-12">
               <div class="wrap-input100 validate-input">
                 <input class="input100" type="text" formControlName="description" placeholder="Description">
                 <span class="focus-input100"></span>
               </div>
             </div>
-            <div class="col col-lg-6">
+            <div class="col-12 col-lg-6">
               <mat-slide-toggle formControlName="isPublished">Publish</mat-slide-toggle>
             </div>
-            <div class="col col-lg-6">
+            <div class="col-12 col-lg-6">
               <mat-slide-toggle formControlName="isFrontPage">Front Page</mat-slide-toggle>
             </div>
-            <div class="col col-lg-12 image-upload-container">
+            <div class="col-12 col-lg-12 image-upload-container">
               <h4>
                 Front Image
               </h4>
-              <label for="upload" id="upload-label" >
+              <label for="upload" id="upload-label">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">file_copy</mat-icon>
-                Upload Image 
+                Upload Image
               </label>
               <input id="upload" class="custom-file-input" type="file" name="image" (change)="fileProgress($event)" />
-              <div *ngIf="this.previewUrl" class="preview" [ngStyle]="{'background-image': 'url(' + this.previewUrl + ')'}">
+              <div *ngIf="this.previewUrl" class="preview"
+                [ngStyle]="{'background-image': 'url(' + this.previewUrl + ')'}">
                 <div class="close-cont" (click)="removeFrontImage()">
                   <mat-icon aria-hidden="false" aria-label="Example home icon">close</mat-icon>
                 </div>
               </div>
             </div>
-            <div class="col col-lg-12 image-upload-container">
+            <div class="col-12 col-lg-12 image-upload-container">
               <h4>
                 Gallery
               </h4>
               <app-drag-and-drop (filesEvent)='changeGalleryFiles($event)'></app-drag-and-drop>
             </div>
-            <div class="col col-lg-12">
-              <div *ngIf="submitted" class="validation">
-                <div *ngIf="title.invalid">
-                  <span *ngIf="title.errors.required">
-                    Title is required!
-                  </span>
-                  <span *ngIf="title.errors.minlength  && (title.dirty || title.touched)">
-                    Title has to be at least 5 charecters long!
-                  </span>
-                  <span *ngIf="title.errors.maxlength  && (title.dirty || title.touched)">
-                    Title can be maximum 100 charecters long!
-                  </span>
-                </div>
-                <div *ngIf="content.invalid">
-                  <span *ngIf="content.errors.required">
-                    Content is required!
-                  </span>
-                  <span *ngIf="content.errors.minlength  && (content.dirty || content.touched)">
-                    Content has to be at least 8 charecters long!
-                  </span>
-                  <span *ngIf="content.errors.maxlength  && (content.dirty || content.touched)">
-                    Content can be maximum 10 000 charecters long!
-                  </span>
-                </div>
-                <div *ngIf="description.invalid">
-                  <span *ngIf="description.errors.required">
-                    Description is required!
-                  </span>
-                  <span *ngIf="description.errors.minlength  && (description.dirty || description.touched)">
-                    Description has to be at least 5 charecters long!
-                  </span>
-                  <span *ngIf="description.errors.maxlength  && (description.dirty || description.touched)">
-                    Description can be maximum 1000 charecters long!
-                  </span>
-                </div>
-              </div>
-              <div class="container-contact100-form-btn">
-                <div class="wrap-contact100-form-btn">
-                  <div class="contact100-form-bgbtn"></div>
-                  <button action="submit" class="contact100-form-btn">Create post</button>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
 
-        <div class="col col-lg-7">
+        <div class="col-12 col-lg-7 content-cont">
           <h4>
             Content
           </h4>
           <ckeditor (ready)="onReady($event)" [editor]="editor" formControlName="content"></ckeditor>
         </div>
-
+        <div class="col-12 col-lg-12">
+          <div *ngIf="submitted" class="validation">
+            <div *ngIf="title.invalid">
+              <span *ngIf="title.errors.required">
+                Title is required!
+              </span>
+              <span *ngIf="title.errors.minlength  && (title.dirty || title.touched)">
+                Title has to be at least 5 charecters long!
+              </span>
+              <span *ngIf="title.errors.maxlength  && (title.dirty || title.touched)">
+                Title can be maximum 100 charecters long!
+              </span>
+            </div>
+            <div *ngIf="content.invalid">
+              <span *ngIf="content.errors.required">
+                Content is required!
+              </span>
+              <span *ngIf="content.errors.minlength  && (content.dirty || content.touched)">
+                Content has to be at least 8 charecters long!
+              </span>
+              <span *ngIf="content.errors.maxlength  && (content.dirty || content.touched)">
+                Content can be maximum 10 000 charecters long!
+              </span>
+            </div>
+            <div *ngIf="description.invalid">
+              <span *ngIf="description.errors.required">
+                Description is required!
+              </span>
+              <span *ngIf="description.errors.minlength  && (description.dirty || description.touched)">
+                Description has to be at least 5 charecters long!
+              </span>
+              <span *ngIf="description.errors.maxlength  && (description.dirty || description.touched)">
+                Description can be maximum 1000 charecters long!
+              </span>
+            </div>
+          </div>
+          <div class="container-contact100-form-btn">
+            <div class="wrap-contact100-form-btn">
+              <div class="contact100-form-bgbtn"></div>
+              <button action="submit" class="contact100-form-btn">Create post</button>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </div>

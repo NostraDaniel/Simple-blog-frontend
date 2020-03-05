@@ -4,7 +4,7 @@
   border:1px solid #DE9A86;
   transition: 0.3s all ease-in-out;
 
-  &:hover {
+  &:hover, &:focus {
     background: #BF6D54;
   }
 }
@@ -17,4 +17,21 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.all-posts-container {
+  position: relative;
+
+  @media screen and(max-width: 766px){
+    padding-top: 70px;
+  }
+
+  .sidebar-container {
+    @media screen and(max-width: 766px){
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
 }

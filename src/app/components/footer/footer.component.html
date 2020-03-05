@@ -1,123 +1,114 @@
 <footer id="footer">
-  <div class="top-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col col-lg-3">
-          <h4>Видове процедури</h4>
-          <ul class="nav-procedures">
-            <li><a href="#">Трайно обезкосмяване</a></li>
-            <li><a href="#">Фотоподмпладяване</a></li>
-            <li><a href="#">Лечение на акне</a></li>
-            <li><a href="#">Премахване на стрии,белези,капиляри</a></li>
-            <li><a href="#">3D радиочестотен лифтинг</a></li>
-            <li><a href="#">Аква пилинг терапия</a></li>
-            <li><a href="#">Микродермабразио</a></li>
-            <li><a href="#">Безиглена мезотерапия</a></li>
-            <li><a href="#">Терапии за лице</a></li>
-            <li><a href="#">Пилинг</a></li>
-          </ul>
-        </div>
-        <div class="col col-lg-3">
-          <app-newest-posts></app-newest-posts>
-        </div>
-        <div class="col col-lg-3">
-          <h4>Contact us</h4>
-          <form class="contact100-form validate-form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
-            <div class="wrap-input100 validate-input">
-              <input class="input100" type="text"  formControlName="name" placeholder="Name">
-              <span class="focus-input100"></span>
-            </div>
-
-            <div class="wrap-input100 validate-input">
-              <input class="input100" type="text" formControlName="email" placeholder="Your email">
-              <span class="focus-input100"></span>
-            </div>
-
-            <div class="wrap-input100">
-              <input class="input100" type="text" formControlName="topic" placeholder="Topic">
-              <span class="focus-input100"></span>
-            </div>
-
-            <div class="wrap-input100 validate-input">
-              <textarea class="input100" formControlName="message" placeholder="Message"></textarea>
-              <span class="focus-input100"></span>
-            </div>
-            <div *ngIf="submitted" class="validation">
-              <div *ngIf="name.invalid">
-                <span *ngIf="name.errors.required">
-                  Name is required!
-                </span>
-                <span *ngIf="name.errors.minlength  && (name.dirty || name.touched)">
-                  Name has to be at least 4 charecters long!
-                </span>
+    <div class="top-footer">
+      <div class="container">
+        <div class="row center">
+          <div class="col-12 col-sm-6 col-lg-3 footer-menu">
+            <h4>Footer menu</h4>
+            <ul class="nav-procedures">
+                <li routerLinkActive="current"><a routerLink="/home"  data-hover="Home" class="menu-link">Home</a></li>
+                <li routerLinkActive="current"><a routerLink="/blog" data-hover="Blog" routerLinkActive="active-link" class="menu-link">Blog</a></li>
+            </ul>
+          </div>
+          <div class="col col-sm-6 col-lg-3 newest-posts">
+            <app-newest-posts></app-newest-posts>
+          </div>
+          <div class="col-8 col-sm-6 col-lg-3">
+            <h4>Contact us</h4>
+            <form class="contact100-form validate-form" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+              <div class="wrap-input100 validate-input">
+                <input class="input100" type="text"  formControlName="name" placeholder="Name">
+                <span class="focus-input100"></span>
               </div>
-              <div *ngIf="email.invalid">
-                <span *ngIf="email.errors.required">
-                  Email is required!
-                </span>
-                <span *ngIf="email.errors.minlength && (email.dirty || email.touched)">
-                  Email has to be at least 8 charecters long!
-                </span>
-                <span *ngIf="email.errors.email && (email.dirty || email.touched)">
-                  Email field has to contain valid email address!
-                </span>
+  
+              <div class="wrap-input100 validate-input">
+                <input class="input100" type="text" formControlName="email" placeholder="Your email">
+                <span class="focus-input100"></span>
               </div>
-              <div *ngIf="topic.invalid">
-                <span *ngIf="topic.errors.required">
-                  Topic is required!
-                </span>
+  
+              <div class="wrap-input100">
+                <input class="input100" type="text" formControlName="topic" placeholder="Topic">
+                <span class="focus-input100"></span>
               </div>
-              <div *ngIf="message.invalid">
-                <span *ngIf="message.errors.required">
-                  Message is required!
-                </span>
-                <span *ngIf="message.errors.minlength && (message.dirty || message.touched)">
-                  Message has to be at least 10 charecters long!
-                </span>
-                <span *ngIf="message.errors.maxlength && (message.dirty || message.touched)">
-                  Message has to be at least 2000 charecters long!
-                </span>
+  
+              <div class="wrap-input100 validate-input">
+                <textarea class="input100" formControlName="message" placeholder="Message"></textarea>
+                <span class="focus-input100"></span>
               </div>
-            </div>
-            <div class="container-contact100-form-btn">
-              <div class="wrap-contact100-form-btn">
-                <div class="contact100-form-bgbtn"></div>
-                <!-- [disabled]="!emailForm.valid" -->
-                  <button class="contact100-form-btn"  action="submit">
-                  Send
-                </button>
+              <div *ngIf="submitted" class="validation">
+                <div *ngIf="name.invalid">
+                  <span *ngIf="name.errors.required">
+                    Name is required!
+                  </span>
+                  <span *ngIf="name.errors.minlength  && (name.dirty || name.touched)">
+                    Name has to be at least 4 charecters long!
+                  </span>
+                </div>
+                <div *ngIf="email.invalid">
+                  <span *ngIf="email.errors.required">
+                    Email is required!
+                  </span>
+                  <span *ngIf="email.errors.minlength && (email.dirty || email.touched)">
+                    Email has to be at least 8 charecters long!
+                  </span>
+                  <span *ngIf="email.errors.email && (email.dirty || email.touched)">
+                    Email field has to contain valid email address!
+                  </span>
+                </div>
+                <div *ngIf="topic.invalid">
+                  <span *ngIf="topic.errors.required">
+                    Topic is required!
+                  </span>
+                </div>
+                <div *ngIf="message.invalid">
+                  <span *ngIf="message.errors.required">
+                    Message is required!
+                  </span>
+                  <span *ngIf="message.errors.minlength && (message.dirty || message.touched)">
+                    Message has to be at least 10 charecters long!
+                  </span>
+                  <span *ngIf="message.errors.maxlength && (message.dirty || message.touched)">
+                    Message has to be at least 2000 charecters long!
+                  </span>
+                </div>
               </div>
-            </div>
-          </form>
-        </div>
-        <div class="col col-lg-3 contacts">
-          <h4>Контакти</h4>
-          <p>
-              Адрес: гр. Пловдив, бул."Марица" 27Д
-              <br>
-              <span>Телефони:</span>
-              
-              0886/964545
-              <span>E-mail:</span>
-              <a href="#">code_beauty@abv.bg</a>
-          </p>
+              <div class="container-contact100-form-btn">
+                <div class="wrap-contact100-form-btn">
+                  <div class="contact100-form-bgbtn"></div>
+                  <!-- [disabled]="!emailForm.valid" -->
+                    <button class="contact100-form-btn"  action="submit">
+                    Send
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-8 col-sm-6 col-lg-3 contacts">
+            <h4>Contacts</h4>
+            <p>
+                Adress: Lorem ipsum, dolar amet 20
+                <br>
+                <span>Phone:</span>
+                
+                0888/12345
+                <span>E-mail:</span>
+                <a href="#">loremipsum@dolar.com</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="bottom-footer">
-    <div class="container">
-      <div class="col-12 brand-container">
-        <a href="#" class="footer-branding"><img src="../../../assets/images/branding-small.png" alt=""></a>
-        <span class="copyright">Copyright 2019 © Code Beauty </span>
-        <nav class="footer-nav">
-          <ul>
-            <li><a href="#">Потребителски права</a></li>
-            <li><a href="#">Политика за поверителност</a></li>
-            <li><a href="#">Политики за бисквитки</a></li>
-          </ul>
-        </nav>
+    <div class="bottom-footer">
+      <div class="container">
+        <div class="brand-container">
+          <a href="#" class="footer-branding"><img src="../../../assets/images/branding-small.png" alt=""></a>
+          <span class="copyright">Copyright 2019 © Lorem Ipsum </span>
+          <!-- <nav class="footer-nav">
+            <ul>
+              <li><a href="#">Policy</a></li>
+            </ul>
+          </nav> -->
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+  

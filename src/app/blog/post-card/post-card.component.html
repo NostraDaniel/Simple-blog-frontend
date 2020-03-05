@@ -27,6 +27,6 @@
     </mdb-card-text>
 
     <a (click)="showPost(post.id)"  mdbBtn class="blog-btn" mdbWavesEffect>Read more</a>
-    <app-post-options (deleteOptionEvent)='delete($event)' (editPostEvent)="editPost($event)" [post]="post"></app-post-options>
+    <app-post-options *ngIf="showOptions" (deleteOptionEvent)='delete($event)' (editPostEvent)="editPost($event)" [post]="post"></app-post-options>
   </mdb-card-body>
 </mdb-card>

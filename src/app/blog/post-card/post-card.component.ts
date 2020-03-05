@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class PostCardComponent implements OnInit {
 
+  @Input() showOptions: boolean = true;
   @Input() post: IPost;
   @Output() deleteCardEvent = new EventEmitter();
 

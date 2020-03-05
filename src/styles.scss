@@ -159,7 +159,7 @@ button:hover {
     transition: 0.3s all ease-in-out;
   }
 
-  &:hover {
+  &:hover, &:focus {
 
     .carousel-indicators,
     .carousel-control-prev,
@@ -172,7 +172,11 @@ button:hover {
 
 .carousel-item {
   position: relative;
-  height: 655px;
+  height: 370px;
+  z-index: 0;
+  @media screen and (min-width: 640px) {
+    height: 655px;
+  }
 
   video {
     position: absolute;
@@ -210,8 +214,6 @@ button:hover {
     top: 70%;
     left: 0;
     border-radius: 10px;
-    // visibility: hidden;
-    // opacity: 0;
     transition: 0.10s all ease-in-out;
 
     p {
@@ -288,18 +290,21 @@ button:hover {
   background: $btn-color;
   color: white;
   transition: 0.3s all ease-in-out;
+  border-radius: 10px !important;
 
-  &:hover {
+  &:hover, &:focus {
     background: $hover;
+    color: #fff;
   }
 }
 
 #blog-heading {
+  font-size: 22px;
   position: relative;
   font-weight: 400;
   text-align: center;
   padding-bottom: 10px;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 
   &:before {
     content: "";
@@ -312,12 +317,25 @@ button:hover {
     height: 2px;
     background: $btn-color;
   }
+
+  @media screen and(min-width: 640px){
+    font-size: 28px;
+    margin-bottom: 50px;
+  }
 }
 
 main {
-  padding: 60px 0;
+  padding: 40px 0;
+
+  @media screen and (min-width: 640px) {
+    padding: 60px 0;
+  }
 
   .main-img-cont {
+    @media screen and (max-width: 639px) {
+      margin-bottom: 15px;
+    }
+
     img {
       max-width: 100%;
     }
@@ -326,6 +344,7 @@ main {
 
 .heading-cont {
   text-align: center;
+  margin-bottom: 50px;
 
   &.left {
     text-align: left;
@@ -336,8 +355,14 @@ main {
     position: relative;
     text-align: center;
     font-weight: 400;
-    padding-bottom: 20px;
-    margin-bottom: 50px;
+    font-size: 25px;
+    padding-bottom: 15px;
+    
+
+    @media screen and (min-width: 720px) {
+      font-size: 40px;
+      padding-bottom: 20px;
+    }
 
     &:before {
       content: "";
@@ -347,7 +372,6 @@ main {
       left: 50%;
       transform: translateX(-50%);
       width: 92%;
-      ;
       height: 2px;
       background: $btn-color;
     }
@@ -374,7 +398,11 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-bottom: 68px;
+  padding-bottom: 30px;
+
+  @media screen and(min-width: 640px){
+    padding-bottom: 68px;
+  }
 }
 
 .contact100-form-title {
@@ -483,7 +511,10 @@ textarea.input100 {
   display: -ms-flexbox;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+
+  @media screen and(min-width640px){
+    justify-content: center;
+  }
 }
 
 .wrap-contact100-form-btn {
@@ -535,8 +566,100 @@ textarea.input100 {
 
 .navbar.sticky-top.navbar-expand-lg.scrolling-navbar {
   z-index: 1 !important;
+
+  @media screen and (max-width: 639px) {
+    display: none !important;
+  }
 }
 
 .carousel-control-next {
   z-index: 99;
+}
+
+.mobile-menu {
+  display: block;
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  left: -250px;
+  top: 0;
+  z-index: 9999;
+  background: white;
+  transition: 0.3s all ease-in-out;
+
+  .menu {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 1;
+  }
+
+  &:before {
+    content: '';
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba(0,0,0,0.6);
+    transition: 0.3s all ease-in-out;
+  }
+
+  &.show {
+    left: 0;
+    &:before {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+}
+
+.branding {
+  display: inline-block;
+
+  @media screen and(max-width: 639px){
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    max-width: 170px
+  }
+
+  @media screen and(min-width: 640px){  
+    max-width: 200px;
+  }
+  
+
+  img {
+    width: 100%;
+  }
+}
+
+.carousel-caption {
+  @media screen and(max-width: 639px) {
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 80%;
+    bottom: 30px;
+
+    p {
+      font-size: 13px;
+    }
+  }
+}
+
+.hide-mobile {
+  @media screen and(max-width:639px){
+    display: none;
+  }
+}
+
+app-edit-post-dialog form {
+  height: 100%;
+
+  .dialog-content.mat-dialog-content {
+    height: 87%;
+    max-height: 87%;
+  }
 }

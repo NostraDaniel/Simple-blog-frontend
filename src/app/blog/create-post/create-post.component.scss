@@ -67,3 +67,25 @@ h4 {
   background: white;
   cursor: pointer;
 }
+
+.content-cont {
+  margin-bottom: 25px;
+}
+
+main {
+  padding-top: 20px;
+}
+
+.blog-btn {
+  margin-bottom: 20px
+}
+
+.close-btn {
+  border-radius: 10px;
+  background: #DE9A86;
+  transition: 0.3s all ease-in-out;
+  
+  &:hover, &:focus {
+    color: #fff;
+  }
+}

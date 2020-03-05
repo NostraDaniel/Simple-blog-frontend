@@ -21,7 +21,7 @@ export class PostOptionsComponent {
   editPost(post: IPost): void {
     const dialogRef = this.dialog.open(EditPostDialogComponent, {
       width: '600px',
-      height: '800px',
+      height: '780px',
       data: this.post
     });
 
